@@ -5,9 +5,10 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    stylix.url = "github:danth/stylix";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
+  outputs = { self, nixpkgs, home-manager, stylix, ... }:
     let
       system = "aarch64-linux";
     in {
@@ -15,6 +16,7 @@
         inherit system;
         modules = [
           ./hosts/vm-m1/configuration.nix
+          stylix.nixosModules.stylix
           home-manager.nixosModules.home-manager
           {
             nixpkgs.config.allowUnfree = true;
