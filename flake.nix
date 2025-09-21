@@ -20,6 +20,7 @@
           home-manager.nixosModules.home-manager
           {
             nixpkgs.config.allowUnfree = true;
+            nix.settings.experimental-features = [ "nix-command" "flakes" ];
           }
         ];
       };

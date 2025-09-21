@@ -2,8 +2,9 @@
   # Hyprland window manager
   programs.hyprland.enable = true;
   
-  # Display manager - GDM for better Wayland support
-  services.xserver.displayManager.gdm.enable = true;
+  # Display manager - SDDM for better Wayland support
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager.sddm.wayland.enable = true;
 
   # Stylix theming system
   stylix = {

@@ -105,7 +105,7 @@ if [[ ! "$response" =~ ^[Yy]$ ]]; then
 fi
 
 # Run the deployment
-if sudo nixos-rebuild switch --flake .#vm-m1; then
+if sudo nixos-rebuild switch --flake .#vm-m1 --extra-experimental-features nix-command --extra-experimental-features flakes; then
     echo ""
     print_status 0 "Deployment successful!"
     echo ""
