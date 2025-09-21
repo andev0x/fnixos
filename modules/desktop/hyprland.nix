@@ -7,42 +7,22 @@
   services.xserver.displayManager.sddm.wayland.enable = true;
   services.xserver.displayManager.sddm.theme = "sugar-candy";
 
-  # Stylix theming system - minimal and fast
-  stylix = {
-    enable = true;
-    autoEnable = true;
+  # Font configuration - manual setup to avoid GNOME dependencies
+  fonts.packages = with pkgs; [
+    nerdfonts.override { fonts = [ "JetBrainsMono" ]; }
+    noto-fonts-emoji
+  ];
 
-    fonts = {
-      sansSerif = {
-        package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
-        name = "JetBrainsMono Nerd Font";
-      };
-      monospace = {
-        package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
-        name = "JetBrainsMono Nerd Font";
-      };
-      emoji = {
-        package = pkgs.noto-fonts-emoji;
-        name = "Noto Color Emoji";
-      };
-    };
+  # Cursor theme
+  services.xserver.displayManager.sessionCommands = ''
+    xsetroot -cursor_name left_ptr
+  '';
 
-    cursor = {
-      package = pkgs.vanilla-dmz;
-      name = "Vanilla-DMZ";
-      size = 20;  # Smaller cursor for better performance
-    };
-
-    theme = {
-      gtk = {
-        package = pkgs.nordic;
-        name = "Nordic";
-      };
-      icons = {
-        package = pkgs.papirus-icon-theme;
-        name = "Papirus";
-      };
-    };
+  # Font configuration
+  fonts.fontconfig.defaultFonts = {
+    monospace = [ "JetBrainsMono Nerd Font" ];
+    sansSerif = [ "JetBrainsMono Nerd Font" ];
+    emoji = [ "Noto Color Emoji" ];
   };
 
   # Essential Wayland packages - minimal and performance-focused

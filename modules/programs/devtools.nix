@@ -39,7 +39,6 @@
     # Terminal and shell
     tmux           # Terminal multiplexer
     zsh            # Shell
-    oh-my-zsh      # Zsh framework
     starship       # Fast shell prompt
     
     # File management
@@ -77,14 +76,12 @@
     viAlias = true;
   };
 
-  # Enable Zsh with Oh My Zsh
+  # Enable Zsh with basic configuration
   programs.zsh = {
     enable = true;
-    ohMyZsh = {
-      enable = true;
-      plugins = [ "git" "docker" "npm" "node" "python" "rust" "golang" ];
-      theme = "robbyrussell";
-    };
+    enableCompletion = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
   };
 
   # Enable Starship prompt
