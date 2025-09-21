@@ -1,11 +1,7 @@
 { pkgs, ... }: {
-  # Hyprland
   programs.hyprland.enable = true;
-
-  # Display manager (chạy Wayland)
   services.xserver.displayManager.gdm.enable = true;
 
-  # Stylix theme setup
   stylix = {
     enable = true;
 
@@ -26,19 +22,18 @@
       size = 24;
     };
 
-    gtk = {
-      theme = {
+    theme = {
+      gtk = {
         package = pkgs.nordic;
         name = "Nordic";
       };
-      iconTheme = {
+      icons = {
         package = pkgs.papirus-icon-theme;
         name = "Papirus";
       };
     };
   };
 
-  # Waybar + swww (wallpaper)
   environment.systemPackages = with pkgs; [
     waybar swww grim slurp wl-clipboard
   ];
