@@ -7,16 +7,15 @@
   programs.git = {
     enable = true;
     userName = "andev0x";
-    userEmail = "andev@example.com";  
+    userEmail = "andev@example.com";
   };
 
-  # Terminal configuration - optimized for development
+  # Terminal configuration
   programs.kitty.enable = true;
   programs.tmux.enable = true;
 
-  # Development-focused packages
+  # Minimal packages
   home.packages = with pkgs; [
-    # Essential development tools
     fzf bat exa
     lazygit delta gitui
     ranger lf
@@ -32,12 +31,6 @@
 
   # Wallpaper directory
   xdg.configFile."wallpapers".source = ./wallpapers;
-
-  # Enable Starship prompt
-  programs.starship = {
-    enable = true;
-    enableZshIntegration = true;
-  };
 
   home.stateVersion = "25.05";
 }

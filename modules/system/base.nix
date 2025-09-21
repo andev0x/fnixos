@@ -1,11 +1,11 @@
 { pkgs, ... }: {
-  # Essential system packages - minimal and fast
+  # Essential system packages - minimal
   environment.systemPackages = with pkgs; [
     git wget curl htop
     unzip zip
     brightnessctl  # For brightness control
     wofi           # Application launcher
-    ranger         # Terminal file manager (lighter than dolphin)
+    ranger         # Terminal file manager
   ];
 
   # Shell configuration
@@ -17,32 +17,24 @@
   # Networking
   networking.networkmanager.enable = true;
   
-  # Audio support - optimized for performance
+  # Audio support - minimal setup
   hardware.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # Performance optimizations
-    lowLatency = {
-      enable = true;
-      quantum = 64;
-      rate = 48000;
-    };
   };
   
   # Performance optimizations
   boot.kernelParams = [
     "mitigations=off"        # Disable CPU mitigations for better performance
     "preempt=full"           # Better preemption for desktop use
-    "rcu_nocbs=0-3"          # Optimize RCU for ARM64
   ];
   
   # Memory management
   boot.kernel.sysctl = {
     "vm.swappiness" = 10;    # Reduce swap usage
-    "vm.vfs_cache_pressure" = 50;  # Optimize VFS cache
   };
   
   # Disable unnecessary services for performance

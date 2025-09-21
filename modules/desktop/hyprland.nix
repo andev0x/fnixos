@@ -2,61 +2,40 @@
   # Hyprland window manager - pure Wayland setup
   programs.hyprland.enable = true;
 
-  # Stylix theming - minimal configuration
-  stylix = {
-    enable = true;
-    image = ./wallpapers/nord-landscape.jpg;
-    theme = "nord";
-    fonts = {
-      sansSerif = {
-        package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
-        name = "JetBrainsMono Nerd Font";
-      };
-      monospace = {
-        package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
-        name = "JetBrainsMono Nerd Font";
-      };
-    };
-    cursor = {
-      package = pkgs.vanilla-dmz;
-      name = "Vanilla-DMZ";
-      size = 20;
-    };
-  };
-
-  # Minimal display manager - no desktop environment needed
+  # Minimal display manager
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.displayManager.sddm.wayland.enable = true;
 
-  # Additional font packages
+  # Font configuration - minimal setup
   fonts.packages = with pkgs; [
+    nerdfonts.override { fonts = [ "JetBrainsMono" ]; }
     noto-fonts-emoji
   ];
 
-  # Essential Wayland packages - minimal and performance-focused
+  fonts.fontconfig.defaultFonts = {
+    monospace = [ "JetBrainsMono Nerd Font" ];
+    sansSerif = [ "JetBrainsMono Nerd Font" ];
+    emoji = [ "Noto Color Emoji" ];
+  };
+
+  # Essential Wayland packages - minimal set
   environment.systemPackages = with pkgs; [
     # Core Wayland
     hyprland        # Window manager
-    waybar          # Lightweight status bar
-    swww            # Fast wallpaper daemon
+    waybar          # Status bar
+    swww            # Wallpaper daemon
     grim            # Screenshot tool
     slurp           # Region selector
     wl-clipboard    # Clipboard utilities
 
-    # Authentication (lightweight alternative to polkit-gnome)
+    # Authentication
     polkit-kde-agent
 
     # Essential utilities
     wofi            # Application launcher
     wlogout         # Logout menu
-    hyprpaper       # Alternative wallpaper daemon (faster than swww)
   ];
 
   # Security policy kit
   security.polkit.enable = true;
-
-  # Disable unnecessary services for performance
-  # services.xserver.desktopManager.gnome.enable = false;
-  # services.xserver.desktopManager.plasma5.enable = false;
-  # services.xserver.desktopManager.xfce.enable = false;
 }
