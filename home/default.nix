@@ -33,5 +33,11 @@
   # Wallpaper directory
   xdg.configFile."wallpapers".source = ./wallpapers;
 
+  # Enable Starship prompt
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
   home.stateVersion = "25.05";
 }

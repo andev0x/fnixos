@@ -2,6 +2,11 @@
   # Hyprland window manager - pure Wayland setup
   programs.hyprland.enable = true;
 
+  # Stylix theming
+  stylix.enable = true;
+  stylix.image = ./wallpapers/nord-landscape.jpg;
+  stylix.theme = "nord";
+
   # Minimal display manager - no desktop environment needed
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.displayManager.sddm.wayland.enable = true;

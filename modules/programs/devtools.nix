@@ -84,9 +84,4 @@
     syntaxHighlighting.enable = true;
   };
 
-  # Enable Starship prompt
-  programs.starship = {
-    enable = true;
-    enableZshIntegration = true;
-  };
-}
+  
