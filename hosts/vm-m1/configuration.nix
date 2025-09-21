@@ -19,6 +19,8 @@
     shell = pkgs.zsh;
   };
 
+  home-manager.users.andev = import ../../home/default.nix;
+
   services.openssh.enable = true;
   services.qemuGuest.enable = true;
   services.vmwareGuest.enable = true;

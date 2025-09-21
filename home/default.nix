@@ -6,8 +6,8 @@
 
   programs.git = {
     enable = true;
-    userName = "AnDev0x";
-    userEmail = "you@example.com";
+    userName = "andev0x";
+    userEmail = "github.com/andev0x";
   };
 
   programs.kitty.enable = true;
@@ -46,9 +46,10 @@
   '';
 
   # Wallpaper startup
-  xdg.configFile."hypr/startup.conf".text = ''
-    exec-once = swww init && swww img ~/Pictures/wallpapers/nord.jpg
-  '';
+  # xdg.configFile."hypr/startup.conf".text = ''
+  #   # Set your wallpaper here, for example:
+  #   # exec-once = swww init && swww img ~/Pictures/wallpapers/nord.jpg
+  # '';
 
   home.stateVersion = "25.05";
 }

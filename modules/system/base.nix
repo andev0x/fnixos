@@ -14,11 +14,3 @@
 
   # Networking
   networking.networkmanager.enable = true;
-
-  # Time & Locale
-  time.timeZone = "Asia/Ho_Chi_Minh";
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  # Nix
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-}
