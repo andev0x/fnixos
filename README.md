@@ -1,15 +1,16 @@
 # fnixos - NixOS Configuration for ARM64 M1 MacBook
 
-A minimal, scientific, and beautiful NixOS configuration optimized for VMware Fusion on ARM64 M1 MacBooks with Hyprland window manager.
+A minimal, performance-focused NixOS configuration optimized for VMware Fusion on ARM64 M1 MacBooks with Hyprland window manager. Perfect for developers who prioritize speed, efficiency, and web browsing.
 
 ## 🚀 Features
 
 - **ARM64 Optimized**: Specifically configured for Apple M1 MacBooks
-- **Hyprland Desktop**: Modern Wayland compositor with beautiful animations
+- **Pure Hyprland**: No GNOME dependencies - lightweight Wayland compositor
+- **Performance Focused**: Optimized kernel parameters and minimal resource usage
+- **Developer Ready**: Comprehensive development tools and multiple browsers
+- **Web Browsing**: Firefox, Chromium, and Brave pre-installed
+- **Minimal & Fast**: Clean, logical configuration with performance optimizations
 - **Nord Theme**: Consistent Nord color scheme throughout
-- **Minimal & Scientific**: Clean, logical configuration structure
-- **Developer Ready**: Pre-configured development tools and utilities
-- **Custom Wallpapers**: Easy wallpaper management system
 
 ## 📁 Project Structure
 
@@ -86,14 +87,26 @@ fnixos/
 - `Super + 1-5`: Switch workspaces
 - `Print`: Screenshot
 
+### Development Key Bindings
+- `Super + T`: Open Neovim in terminal
+- `Super + B`: Open Firefox
+- `Super + Shift + B`: Open Chromium
+- `Super + G`: Open LazyGit
+- `Super + F`: Open Ranger file manager
+- `Super + E`: Open Ranger file manager
+
 ## 🔧 Development Tools
 
 Pre-installed development tools:
-- **Editors**: Neovim (default), Vim
-- **Languages**: Go, Rust, Python, Node.js
-- **Build Tools**: GCC, CMake, Make
-- **Utilities**: Git, ripgrep, fd, bat, exa
-- **Shell**: Zsh with useful aliases
+- **Editors**: Neovim (default), VS Code, Helix
+- **Languages**: Go, Rust, Python, Node.js, Deno
+- **Build Tools**: GCC, CMake, Make, Ninja
+- **Git Tools**: LazyGit, Delta, Gitui
+- **File Management**: Ranger, LF, FZF
+- **Terminal**: Kitty, Tmux, Zsh with Oh My Zsh
+- **Shell**: Starship prompt, useful aliases
+- **Browsers**: Firefox, Chromium, Brave
+- **Utilities**: ripgrep, fd, bat, exa, tree
 
 ## 📋 System Requirements
 

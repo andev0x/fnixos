@@ -10,12 +10,17 @@
     userEmail = "andev@example.com";  
   };
 
+  # Terminal configuration - optimized for development
   programs.kitty.enable = true;
-  programs.alacritty.enable = true;
   programs.tmux.enable = true;
 
+  # Development-focused packages
   home.packages = with pkgs; [
+    # Essential development tools
     fzf bat exa
+    lazygit delta gitui
+    ranger lf
+    starship
   ];
 
   # Waybar configuration

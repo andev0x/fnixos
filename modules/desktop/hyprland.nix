@@ -1,12 +1,13 @@
 { pkgs, ... }: {
-  # Hyprland window manager
+  # Hyprland window manager - pure Wayland setup
   programs.hyprland.enable = true;
   
-  # Display manager - SDDM for better Wayland support
+  # Minimal display manager - no desktop environment needed
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.displayManager.sddm.wayland.enable = true;
+  services.xserver.displayManager.sddm.theme = "sugar-candy";
 
-  # Stylix theming system
+  # Stylix theming system - minimal and fast
   stylix = {
     enable = true;
     autoEnable = true;
@@ -29,7 +30,7 @@
     cursor = {
       package = pkgs.vanilla-dmz;
       name = "Vanilla-DMZ";
-      size = 24;
+      size = 20;  # Smaller cursor for better performance
     };
 
     theme = {
@@ -44,16 +45,29 @@
     };
   };
 
-  # Desktop environment packages
+  # Essential Wayland packages - minimal and performance-focused
   environment.systemPackages = with pkgs; [
-    waybar          # Status bar
-    swww            # Wallpaper daemon
+    # Core Wayland
+    waybar          # Lightweight status bar
+    swww            # Fast wallpaper daemon
     grim            # Screenshot tool
     slurp           # Region selector
     wl-clipboard    # Clipboard utilities
-    polkit_gnome    # Authentication agent
+    
+    # Authentication (lightweight alternative to polkit-gnome)
+    polkit-kde-agent
+    
+    # Essential utilities
+    wofi            # Application launcher
+    wlogout         # Logout menu
+    hyprpaper       # Alternative wallpaper daemon (faster than swww)
   ];
 
   # Security policy kit
   security.polkit.enable = true;
+  
+  # Disable unnecessary services for performance
+  services.xserver.desktopManager.gnome.enable = false;
+  services.xserver.desktopManager.plasma5.enable = false;
+  services.xserver.desktopManager.xfce.enable = false;
 }
