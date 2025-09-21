@@ -46,8 +46,12 @@ fnixos/
    cd fnixos
    ```
 
-2. **Build the system:**
+2. **Deploy the system:**
    ```bash
+   # Option 1: Use the deployment script (recommended)
+   ./deploy.sh
+   
+   # Option 2: Manual deployment
    sudo nixos-rebuild switch --flake .#vm-m1
    ```
 

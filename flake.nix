@@ -11,15 +11,16 @@
   outputs = { self, nixpkgs, home-manager, stylix, ... }:
     let
       system = "aarch64-linux";
-      pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
     in {
       nixosConfigurations.vm-m1 = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit pkgs; };
         modules = [
           ./hosts/vm-m1/configuration.nix
           stylix.nixosModules.stylix
           home-manager.nixosModules.home-manager
+          {
+            nixpkgs.config.allowUnfree = true;
+          }
         ];
       };
     };

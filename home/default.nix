@@ -7,7 +7,7 @@
   programs.git = {
     enable = true;
     userName = "andev0x";
-    userEmail = "andev0x@example.com";  # Please update with your actual email
+    userEmail = "andev@example.com";  
   };
 
   programs.kitty.enable = true;
