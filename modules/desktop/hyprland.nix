@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   # Hyprland window manager - pure Wayland setup
   programs.hyprland.enable = true;
-  
+
   # Minimal display manager - no desktop environment needed
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.displayManager.sddm.wayland.enable = true;
@@ -53,10 +53,10 @@
     grim            # Screenshot tool
     slurp           # Region selector
     wl-clipboard    # Clipboard utilities
-    
+
     # Authentication (lightweight alternative to polkit-gnome)
     polkit-kde-agent
-    
+
     # Essential utilities
     wofi            # Application launcher
     wlogout         # Logout menu
@@ -65,9 +65,9 @@
 
   # Security policy kit
   security.polkit.enable = true;
-  
+
   # Disable unnecessary services for performance
-  services.xserver.desktopManager.gnome.enable = false;
-  services.xserver.desktopManager.plasma5.enable = false;
-  services.xserver.desktopManager.xfce.enable = false;
+  # services.xserver.desktopManager.gnome.enable = false;
+  # services.xserver.desktopManager.plasma5.enable = false;
+  # services.xserver.desktopManager.xfce.enable = false;
 }
