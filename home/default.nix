@@ -7,7 +7,7 @@
   programs.git = {
     enable = true;
     userName = "andev0x";
-    userEmail = "github.com/andev0x";
+    userEmail = "andev0x@example.com";  # Please update with your actual email
   };
 
   programs.kitty.enable = true;
@@ -18,38 +18,15 @@
     fzf bat exa
   ];
 
-  # Waybar config minimal + Nord theme
-  xdg.configFile."waybar/config".text = ''
-  {
-    "layer": "top",
-    "position": "top",
-    "modules-left": ["hyprland/workspaces"],
-    "modules-center": ["clock"],
-    "modules-right": ["pulseaudio", "network", "battery"],
-    "clock": { "format": "{:%H:%M %d-%m-%Y}" },
-    "pulseaudio": { "format": " {volume}%" },
-    "network": { "format-wifi": " {essid}", "format-ethernet": " {ifname}" },
-    "battery": { "format": "{capacity}% " }
-  }
-  '';
+  # Waybar configuration
+  xdg.configFile."waybar/config".source = ./waybar/config;
+  xdg.configFile."waybar/style.css".source = ./waybar/style.css;
 
-  xdg.configFile."waybar/style.css".text = ''
-    * {
-      font-family: JetBrainsMono Nerd Font;
-      font-size: 13px;
-      color: #ECEFF4;
-    }
-    window#waybar {
-      background-color: #2E3440;
-      border-bottom: 2px solid #4C566A;
-    }
-  '';
+  # Hyprland configuration
+  xdg.configFile."hypr/hyprland.conf".source = ./hypr/hyprland.conf;
 
-  # Wallpaper startup
-  # xdg.configFile."hypr/startup.conf".text = ''
-  #   # Set your wallpaper here, for example:
-  #   # exec-once = swww init && swww img ~/Pictures/wallpapers/nord.jpg
-  # '';
+  # Wallpaper directory
+  xdg.configFile."wallpapers".source = ./wallpapers;
 
   home.stateVersion = "25.05";
 }

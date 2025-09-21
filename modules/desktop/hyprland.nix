@@ -1,9 +1,14 @@
 { pkgs, ... }: {
+  # Hyprland window manager
   programs.hyprland.enable = true;
+  
+  # Display manager - GDM for better Wayland support
   services.xserver.displayManager.gdm.enable = true;
 
+  # Stylix theming system
   stylix = {
     enable = true;
+    autoEnable = true;
 
     fonts = {
       sansSerif = {
@@ -13,6 +18,10 @@
       monospace = {
         package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
         name = "JetBrainsMono Nerd Font";
+      };
+      emoji = {
+        package = pkgs.noto-fonts-emoji;
+        name = "Noto Color Emoji";
       };
     };
 
@@ -34,7 +43,16 @@
     };
   };
 
+  # Desktop environment packages
   environment.systemPackages = with pkgs; [
-    waybar swww grim slurp wl-clipboard
+    waybar          # Status bar
+    swww            # Wallpaper daemon
+    grim            # Screenshot tool
+    slurp           # Region selector
+    wl-clipboard    # Clipboard utilities
+    polkit_gnome    # Authentication agent
   ];
+
+  # Security policy kit
+  security.polkit.enable = true;
 }
