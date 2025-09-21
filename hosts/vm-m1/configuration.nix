@@ -14,7 +14,7 @@
 
   users.users.andev = {
     isNormalUser = true;
-    description = "AnDev0x";
+    description = "andev0x";
     extraGroups = [ "wheel" "networkmanager" "video" "input" ];
     shell = pkgs.zsh;
   };

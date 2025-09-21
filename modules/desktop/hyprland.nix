@@ -1,21 +1,45 @@
 { pkgs, ... }: {
+  # Hyprland
   programs.hyprland.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    waybar
-    rofi-wayland
-    wl-clipboard
-    grim slurp       # screenshot
-    brightnessctl
-    pavucontrol
-    swww             # wallpaper manager
-  ];
-
+  # Display manager (chạy Wayland)
   services.xserver.displayManager.gdm.enable = true;
-  services.xserver.displayManager.gdm.wayland = true;
 
-  stylix.enable = true;
-  stylix.base16Scheme = "nord";
-  stylix.cursor.enable = true;
-  stylix.fonts.sansSerif = "JetBrainsMono Nerd Font";
+  # Stylix theme setup
+  stylix = {
+    enable = true;
+
+    fonts = {
+      sansSerif = {
+        package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
+        name = "JetBrainsMono Nerd Font";
+      };
+      monospace = {
+        package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
+        name = "JetBrainsMono Nerd Font";
+      };
+    };
+
+    cursor = {
+      package = pkgs.vanilla-dmz;
+      name = "Vanilla-DMZ";
+      size = 24;
+    };
+
+    gtk = {
+      theme = {
+        package = pkgs.nordic;
+        name = "Nordic";
+      };
+      iconTheme = {
+        package = pkgs.papirus-icon-theme;
+        name = "Papirus";
+      };
+    };
+  };
+
+  # Waybar + swww (wallpaper)
+  environment.systemPackages = with pkgs; [
+    waybar swww grim slurp wl-clipboard
+  ];
 }
