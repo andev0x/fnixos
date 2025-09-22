@@ -12,7 +12,7 @@
   networking.hostName = "fnixos";
   time.timeZone = "Asia/Ho_Chi_Minh";
   i18n.defaultLocale = "en_US.UTF-8";
-  
+
   # Additional locales
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
@@ -32,6 +32,7 @@
     description = "andev0x";
     extraGroups = [ "wheel" "networkmanager" "video" "input" "audio" "docker" ];
     shell = pkgs.zsh;
+    initialPassword = "hello";
   };
 
   # Home Manager integration
@@ -45,11 +46,11 @@
   services.openssh.enable = true;
   services.qemuGuest.enable = true;
   services.vmwareGuest.enable = true;
-  
+
   # Boot configuration
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  
+
   # Nix configuration
   nix.settings = {
     auto-optimise-store = true;
