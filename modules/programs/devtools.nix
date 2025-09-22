@@ -64,11 +64,14 @@
     enableCompletion = true;
     autosuggestions.enable = true;
     syntaxHighlighting.enable = true;
+    # Initialize Starship prompt
+    initExtra = ''
+      eval "$(starship init zsh)"
+    '';
   };
 
   # Enable Starship prompt
   programs.starship = {
     enable = true;
-    enableZshIntegration = true;
   };
 }
