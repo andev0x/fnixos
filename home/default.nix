@@ -16,7 +16,7 @@
 
   # Minimal packages
   home.packages = with pkgs; [
-    fzf bat exa
+    fzf bat eza
     lazygit delta gitui
     ranger lf
     starship

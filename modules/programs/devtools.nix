@@ -34,17 +34,17 @@
     ranger         # Terminal file manager
     fzf            # Fuzzy finder
     bat            # Better cat
-    exa            # Better ls
+    eza            # Better ls
   ];
 
   # Shell aliases for better developer experience
   environment.shellAliases = {
     vi = "nvim";
     vim = "nvim";
-    ll = "exa -la";
-    la = "exa -A";
-    l = "exa";
-    ls = "exa";
+    ll = "eza -la";
+    la = "eza -A";
+    l = "eza";
+    ls = "eza";
     grep = "rg";
     find = "fd";
     cat = "bat";
