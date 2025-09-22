@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, ... }: {base
   # Essential system packages - minimal
   environment.systemPackages = with pkgs; [
     git wget curl htop
@@ -16,7 +16,7 @@
 
   # Networking
   networking.networkmanager.enable = true;
-  
+
   # Audio support - minimal setup
   hardware.pulseaudio.enable = false;
   services.pipewire = {
@@ -25,21 +25,21 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-  
+
   # Performance optimizations
   boot.kernelParams = [
     "mitigations=off"        # Disable CPU mitigations for better performance
     "preempt=full"           # Better preemption for desktop use
   ];
-  
+
   # Memory management
   boot.kernel.sysctl = {
     "vm.swappiness" = 10;    # Reduce swap usage
   };
-  
+
   # Disable unnecessary services for performance
   services.blueman.enable = false;
-  services.cups.enable = false;
+  #services.cups.enable = false;
   services.printing.enable = false;
   services.avahi.enable = false;
   services.udisks2.enable = false;
