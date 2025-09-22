@@ -23,12 +23,15 @@
 
     # Web browsers
     firefox        # Primary browser
-    chromium       # Secondary browser
 
     # Terminal and shell
     tmux           # Terminal multiplexer
     zsh            # Shell
     starship       # Fast shell prompt
+    alacritty
+    kitty
+    wezterm
+
 
     # File management
     ranger         # Terminal file manager
