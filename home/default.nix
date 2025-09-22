@@ -11,7 +11,8 @@
   };
 
   # Terminal configuration
-  programs.kitty.enable = true;
+  programs.kitty.enable = false;
+  programs.alacritty.enable = true;
   programs.tmux.enable = true;
 
   # Minimal packages
