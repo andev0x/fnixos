@@ -6,30 +6,30 @@
     gnumake
     cmake
     pkg-config
-    
+
     # Programming languages
     go
     rustup
     python3
     nodejs
-    
+
     # Text editors
     neovim
-    
+
     # Development utilities
     ripgrep        # Fast text search
     fd             # Better find
     git-lfs        # Git large file storage
-    
+
     # Web browsers
     firefox        # Primary browser
     chromium       # Secondary browser
-    
+
     # Terminal and shell
     tmux           # Terminal multiplexer
     zsh            # Shell
     starship       # Fast shell prompt
-    
+
     # File management
     ranger         # Terminal file manager
     fzf            # Fuzzy finder
@@ -64,10 +64,7 @@
     enableCompletion = true;
     autosuggestions.enable = true;
     syntaxHighlighting.enable = true;
-    # Initialize Starship prompt
-    initExtra = ''
-      eval "$(starship init zsh)"
-    '';
+
   };
 
   # Enable Starship prompt
