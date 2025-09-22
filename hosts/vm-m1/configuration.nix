@@ -30,7 +30,8 @@
   users.users.andev = {
     isNormalUser = true;
     description = "andev0x";
-    extraGroups = [ "wheel" "networkmanager" "video" "input" "audio" "docker" ];
+    services.seatd.enable = true;
+    extraGroups = [ "wheel" "seat" "networkmanager" "video" "input" "audio" "docker" ];
     shell = pkgs.zsh;
     initialPassword = "hello";
   };
