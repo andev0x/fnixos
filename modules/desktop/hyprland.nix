@@ -29,7 +29,7 @@
     wl-clipboard    # Clipboard utilities
 
     # Authentication
-    polkit-kde-agent-1
+    kdePackages.polkit-kde-agent-1
 
     # Essential utilities
     wofi            # Application launcher
