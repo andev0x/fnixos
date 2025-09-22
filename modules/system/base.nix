@@ -1,4 +1,4 @@
-{ pkgs, ... }: {base
+{ pkgs, ... }: {
   # Essential system packages - minimal
   environment.systemPackages = with pkgs; [
     git wget curl htop
@@ -39,7 +39,6 @@
 
   # Disable unnecessary services for performance
   services.blueman.enable = false;
-  #services.cups.enable = false;
   services.printing.enable = false;
   services.avahi.enable = false;
   services.udisks2.enable = false;
