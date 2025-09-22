@@ -29,6 +29,7 @@
     zsh            # Shell
     starship       # Fast shell prompt
     alacritty
+    xorg.xhost
     kitty
     wezterm
 

@@ -47,6 +47,7 @@
   services.openssh.enable = true;
   services.qemuGuest.enable = true;
   services.vmwareGuest.enable = true;
+  programs.xwayland.enable = true;
 
   # Boot configuration
   boot.loader.systemd-boot.enable = true;
