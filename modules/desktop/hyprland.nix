@@ -2,13 +2,13 @@
   # Hyprland window manager - pure Wayland setup
   programs.hyprland.enable = true;
 
-  # Minimal display manager
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.displayManager.sddm.wayland.enable = true;
+  # Minimal display manager (SDDM Wayland)
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
 
   # Font configuration - minimal setup
   fonts.packages = with pkgs; [
-    nerdfonts.override { fonts = [ "JetBrainsMono" ]; }
+    nerd-fonts.jetbrains-mono
     noto-fonts-emoji
   ];
 
