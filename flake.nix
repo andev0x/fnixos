@@ -11,16 +11,18 @@
     let
       system = "aarch64-linux";
     in {
-      nixosConfigurations.vm-m1 = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          ./hosts/vm-m1/configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            nixpkgs.config.allowUnfree = true;
-            nix.settings.experimental-features = [ "nix-command" "flakes" ];
-          }
-        ];
+      nixosConfigurations = {
+        vm-m1 = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./hosts/vm-m1/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              nixpkgs.config.allowUnfree = true;
+              nix.settings.experimental-features = [ "nix-command" "flakes" ];
+            }
+          ];
+        };
       };
     };
 }
