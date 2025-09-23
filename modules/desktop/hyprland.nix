@@ -34,8 +34,18 @@
     # Essential utilities
     wofi            # Application launcher
     wlogout         # Logout menu
+    mesa
+    mesa.drivers
+    vulkan-tools
+    glxinfo
   ];
 
   # Security policy kit
   security.polkit.enable = true;
+
+  # Desktop portals for Wayland apps
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
 }
