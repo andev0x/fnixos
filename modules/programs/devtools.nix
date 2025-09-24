@@ -40,6 +40,9 @@
     fzf            # Fuzzy finder
     bat            # Better cat
     eza            # Better ls
+    fastfetch
+    iotop
+    sysstat
   ];
 
   # Shell aliases for better developer experience
@@ -53,6 +56,10 @@
     grep = "rg";
     find = "fd";
     cat = "bat";
+    csg = "sudo nix-env --delete-generations +2 --profile /nix/var/nix/profiles/system";
+    cg = "sudo nix-collect-garbage -d";
+    nixdisk= "du -sh /nix/store";
+
   };
 
   # Enable development features
