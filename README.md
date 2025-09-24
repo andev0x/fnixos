@@ -1,14 +1,19 @@
-# fnixos - NixOS Configuration for ARM64 M1 MacBook
+# fnixos - NixOS Configuration for ARM64 M MacBook
 
-A minimal, performance-focused NixOS configuration optimized for VMware Fusion on ARM64 M1 MacBooks with Hyprland window manager. Perfect for developers who prioritize speed, efficiency, and web browsing.
+A minimal, performance-focused NixOS configuration optimized for VMware Fusion on ARM64 M MacBooks with Hyprland window manager. Perfect for developers who prioritize speed, efficiency, and web browsing.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/andev0x/description-image-archive/refs/heads/main/fnixos/p1.png"  />
+</p>
+
 
 ## 🚀 Features
 
-- **ARM64 Optimized**: Specifically configured for Apple M1 MacBooks
+- **ARM64 Optimized**: Specifically configured for Apple M MacBooks
 - **Pure Hyprland**: No GNOME dependencies - lightweight Wayland compositor
 - **Performance Focused**: Optimized kernel parameters and minimal resource usage
 - **Developer Ready**: Comprehensive development tools and multiple browsers
-- **Web Browsing**: Firefox, Chromium, and Brave pre-installed
+- **Web Browsing**: Qute, Firefox, Chromium, and Brave pre-installed
 - **Minimal & Fast**: Clean, logical configuration with performance optimizations
 - **Nord Theme**: Consistent Nord color scheme throughout
 
@@ -89,7 +94,7 @@ fnixos/
 
 ### Development Key Bindings
 - `Super + T`: Open Neovim in terminal
-- `Super + B`: Open Firefox
+- `Super + B`: Open Firefox (Browser)
 - `Super + Shift + B`: Open Chromium
 - `Super + G`: Open LazyGit
 - `Super + F`: Open Ranger file manager
@@ -105,7 +110,7 @@ Pre-installed development tools:
 - **File Management**: Ranger, LF, FZF
 - **Terminal**: Kitty, Tmux, Zsh with Oh My Zsh
 - **Shell**: Starship prompt, useful aliases
-- **Browsers**: Firefox, Chromium, Brave
+- **Browsers**: Firefox, Chromium, Brave, Qute
 - **Utilities**: ripgrep, fd, bat, exa, tree
 
 ## 📋 System Requirements
