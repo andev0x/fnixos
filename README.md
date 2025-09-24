@@ -1,6 +1,6 @@
-# fnixos - NixOS Configuration for ARM64 M MacBook
+# fnixos - NixOS Configuration for ARM64 Apple Silicon
 
-A minimal, performance-focused NixOS configuration optimized for VMware Fusion on ARM64 M MacBooks with Hyprland window manager. Perfect for developers who prioritize speed, efficiency, and web browsing.
+A minimal, performance-focused NixOS configuration optimized for VMware Fusion on ARM64 Apple Silicon with Hyprland window manager. Perfect for developers who prioritize speed, efficiency, and web browsing.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/andev0x/description-image-archive/refs/heads/main/fnixos/p1.png"  />
@@ -9,7 +9,7 @@ A minimal, performance-focused NixOS configuration optimized for VMware Fusion o
 
 ## 🚀 Features
 
-- **ARM64 Optimized**: Specifically configured for Apple M MacBooks
+- **ARM64 Optimized**: Specifically configured for Apple Silicon
 - **Pure Hyprland**: No GNOME dependencies - lightweight Wayland compositor
 - **Performance Focused**: Optimized kernel parameters and minimal resource usage
 - **Developer Ready**: Comprehensive development tools and multiple browsers
@@ -116,7 +116,7 @@ Pre-installed development tools:
 ## 📋 System Requirements
 
 - **Architecture**: ARM64 (aarch64-linux)
-- **Platform**: VMware Fusion on Apple M1 MacBook
+- **Platform**: VMware Fusion on Apple Silicon
 - **Memory**: Minimum 4GB RAM
 - **Storage**: Minimum 20GB free space
 
