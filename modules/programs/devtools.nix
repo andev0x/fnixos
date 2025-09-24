@@ -22,7 +22,8 @@
     git-lfs        # Git large file storage
 
     # Web browsers
-    firefox        # Primary browser
+    #firefox        # Primary browser
+    qutebrowser
 
     # Terminal and shell
     tmux           # Terminal multiplexer
@@ -32,7 +33,7 @@
     xorg.xhost
     kitty
     wezterm
-
+    ghostty
 
     # File management
     ranger         # Terminal file manager
@@ -43,7 +44,7 @@
 
   # Shell aliases for better developer experience
   environment.shellAliases = {
-    vi = "nvim";
+    vi = "vim";
     vim = "nvim";
     ll = "eza -la";
     la = "eza -A";
