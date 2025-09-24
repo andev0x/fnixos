@@ -56,10 +56,10 @@ fnixos/
    ```bash
    # Option 1: Use the deployment script (recommended)
    ./deploy.sh
-   
+
    # Option 2: Test the configuration first
    ./test-build.sh
-   
+
    # Option 3: Manual deployment
    sudo nixos-rebuild switch --flake .#vm-m1 --extra-experimental-features nix-command --extra-experimental-features flakes
    ```
