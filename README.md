@@ -129,6 +129,23 @@ git pull
 sudo nixos-rebuild switch --flake .#vm-m1 --upgrade
 ```
 
+## 🧪 DevShells for Development
+
+Go-focused DevShell is available via flakes:
+
+```bash
+# Enter default dev shell (basic tools)
+nix develop
+
+# Enter Go dev shell with gopls, golangci-lint, and gotools
+nix develop .#go
+
+# Inside the shell
+go version
+golangci-lint version
+gopls version
+```
+
 ## 🐛 Troubleshooting
 
 ### Common Issues
