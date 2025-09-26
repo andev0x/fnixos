@@ -35,7 +35,7 @@
     wofi            # Application launcher
     wlogout         # Logout menu
     mesa
-    mesa.drivers
+    #mesa.drivers
     vulkan-tools
     glxinfo
   ];
