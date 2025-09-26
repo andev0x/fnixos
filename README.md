@@ -3,7 +3,7 @@
 A minimal, performance-focused NixOS configuration optimized for VMware Fusion on ARM64 Apple Silicon with Hyprland window manager. Perfect for developers who prioritize speed, efficiency, and web browsing.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/andev0x/description-image-archive/refs/heads/main/fnixos/p1.png"  />
+  <img src="https://raw.githubusercontent.com/andev0x/description-image-archive/refs/heads/main/fnixos/p2.png"  />
 </p>
 
 
