@@ -49,6 +49,7 @@ button:hover {
   color: #ECEFF4;
 }
 
+#window,
 #clock,
 #battery,
 #cpu,
@@ -56,13 +57,24 @@ button:hover {
 #network,
 #pulseaudio,
 #tray,
-#custom-lock,
-#custom-reboot,
-#custom-power {
+#power {
   padding: 0 12px;
   margin: 0 4px;
   border-radius: 8px;
   background: rgba(76, 86, 106, 0.25);
+}
+
+#window {
+  font-style: italic;
+  color: #D8DEE9;
+}
+
+#custom-lock,
+#custom-reboot,
+#custom-power {
+  padding: 0 6px;
+  margin: 0 2px;
+  color: #ECEFF4;
 }
 
 #clock {
@@ -109,13 +121,13 @@ button:hover {
 
 /* Custom buttons (lock, reboot, power) */
 #custom-lock:hover {
-  background: rgba(136, 192, 208, 0.3);
+  color: #88C0D0;
 }
 
 #custom-reboot:hover {
-  background: rgba(235, 203, 139, 0.3);
+  color: #EBCB8B;
 }
 
 #custom-power:hover {
-  background: rgba(191, 97, 106, 0.3);
+  color: #BF616A;
 }
