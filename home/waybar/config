@@ -1,64 +1,70 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 30,
-  "spacing": 4,
+  "height": 34,
+  "spacing": 6,
+
   "modules-left": ["hyprland/workspaces", "hyprland/window"],
   "modules-center": ["clock"],
-  "modules-right": ["pulseaudio", "network", "battery", "tray"],
-  
+  "modules-right": ["cpu", "memory", "pulseaudio", "network", "battery", "tray", "group/power"],
+
   "hyprland/workspaces": {
     "disable-scroll": true,
     "all-outputs": true,
     "format": "{icon}",
     "format-icons": {
-      "1": "󰈹",
-      "2": "󰈹",
-      "3": "󰈹",
-      "4": "󰈹",
-      "5": "󰈹",
-      "urgent": "󰈹",
-      "focused": "󰈹",
-      "default": "󰈹"
+      "1": "",
+      "2": "",
+      "3": "󰈙",
+      "4": "󰓇",
+      "5": "󰎄",
+      "urgent": "",
+      "focused": "",
+      "default": ""
     }
   },
-  
+
   "hyprland/window": {
     "format": "{}",
+    "max-length": 50,
     "separate-outputs": true
   },
-  
+
   "clock": {
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format-alt": "{:%Y-%m-%d}"
+    "format": "󰥔 {:%H:%M}",
+    "format-alt": "󰃭 {:%Y-%m-%d}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   },
-  
+
+  "cpu": {
+    "interval": 2,
+    "format": "󰍛 {usage}%",
+    "tooltip": false
+  },
+
+  "memory": {
+    "interval": 5,
+    "format": "󰍹 {used:0.1f}G",
+    "tooltip": false
+  },
+
   "pulseaudio": {
     "format": "{icon} {volume}%",
-    "format-bluetooth": "{icon} {volume}%",
-    "format-bluetooth-muted": "󰸈",
     "format-muted": "󰸈",
     "format-icons": {
-      "headphone": "󰋋",
-      "hands-free": "󰋋",
-      "headset": "󰋋",
-      "phone": "󰄜",
-      "portable": "󰦧",
-      "car": "󰄋",
       "default": ["󰕿", "󰖀", "󰕾"]
     },
     "on-click": "pavucontrol"
   },
-  
+
   "network": {
     "format-wifi": "󰤨 {signalStrength}%",
     "format-ethernet": "󰈀 {ifname}",
-    "format-linked": "󰈀 {ifname}",
     "format-disconnected": "󰤭",
     "format-alt": "{ifname}: {ipaddr}/{cidr}",
     "tooltip-format": "{essid} - {ipaddr}"
   },
-  
+
   "battery": {
     "states": {
       "warning": 30,
@@ -66,12 +72,28 @@
     },
     "format": "{icon} {capacity}%",
     "format-charging": "󰂄 {capacity}%",
-    "format-plugged": "󰂄 {capacity}%",
-    "format-alt": "{time} {icon}",
     "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
   },
-  
+
   "tray": {
-    "spacing": 10
+    "spacing": 8
+  },
+
+  "group/power": {
+    "orientation": "horizontal",
+    "modules": ["custom/lock", "custom/reboot", "custom/power"]
+  },
+
+  "custom/lock": {
+    "format": "",
+    "on-click": "loginctl lock-session"
+  },
+  "custom/reboot": {
+    "format": "󰜉",
+    "on-click": "systemctl reboot"
+  },
+  "custom/power": {
+    "format": "󰐥",
+    "on-click": "systemctl poweroff"
   }
 }
