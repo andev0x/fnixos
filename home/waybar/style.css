@@ -107,12 +107,7 @@ button:hover {
   color: #ECEFF4;
 }
 
-#custom-lock,
-#custom-reboot,
-#custom-power {
-  cursor: pointer;
-}
-
+/* Custom buttons (lock, reboot, power) */
 #custom-lock:hover {
   background: rgba(136, 192, 208, 0.3);
 }
