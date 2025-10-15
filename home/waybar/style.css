@@ -5,11 +5,14 @@
 }
 
 window#waybar {
-  background-color: rgba(46, 52, 64, 0.95);
-  border-bottom: 2px solid #4C566A;
-  color: #ECEFF4;
+  /* make the bar semi-transparent so wallpaper shows through */
+  background-color: rgba(46, 52, 64, 0.6);
+  border-bottom: 2px solid rgba(76, 86, 106, 0.5);
+  color: #eceff4;
   transition-property: background-color;
-  transition-duration: .5s;
+  transition-duration: 0.5s;
+  /* use a custom kunai cursor when hovering over the bar */
+  cursor: url("/home/$USER/.config/assets/kunai.cur"), auto;
 }
 
 window#waybar.hidden {
@@ -29,7 +32,7 @@ button:hover {
 #workspaces button {
   padding: 0 5px;
   background-color: transparent;
-  color: #D8DEE9;
+  color: #d8dee9;
 }
 
 #workspaces button:hover {
@@ -37,17 +40,17 @@ button:hover {
 }
 
 #workspaces button.focused {
-  background-color: #5E81AC;
-  color: #ECEFF4;
+  background-color: #5e81ac;
+  color: #eceff4;
 }
 
 #workspaces button.urgent {
-  background-color: #BF616A;
+  background-color: #bf616a;
 }
 
 #mode {
-  background-color: #64727D;
-  border-bottom: 3px solid #ECEFF4;
+  background-color: #64727d;
+  border-bottom: 3px solid #eceff4;
 }
 
 #clock,
@@ -65,7 +68,7 @@ button:hover {
 #idle_inhibitor,
 #mpd {
   padding: 0 10px;
-  color: #ECEFF4;
+  color: #eceff4;
 }
 
 #window,
@@ -89,21 +92,22 @@ button:hover {
   background-color: transparent;
 }
 
-#battery.charging, #battery.plugged {
-  color: #A3BE8C;
+#battery.charging,
+#battery.plugged {
+  color: #a3be8c;
   background-color: transparent;
 }
 
 @keyframes blink {
   to {
-    background-color: #ECEFF4;
-    color: #2E3440;
+    background-color: #eceff4;
+    color: #2e3440;
   }
 }
 
 #battery.critical:not(.charging) {
-  background-color: #BF616A;
-  color: #ECEFF4;
+  background-color: #bf616a;
+  color: #eceff4;
   animation-name: blink;
   animation-duration: 0.5s;
   animation-timing-function: linear;
@@ -112,7 +116,7 @@ button:hover {
 }
 
 label:focus {
-  background-color: #2E3440;
+  background-color: #2e3440;
 }
 
 #network {
@@ -120,7 +124,7 @@ label:focus {
 }
 
 #network.disconnected {
-  background-color: #BF616A;
+  background-color: #bf616a;
 }
 
 #pulseaudio {
@@ -128,12 +132,18 @@ label:focus {
 }
 
 #pulseaudio.muted {
-  background-color: #90A1B1;
+  background-color: #90a1b1;
   color: #2a5c45;
 }
 
 #tray {
   background-color: transparent;
+}
+
+/* make tray icons a bit larger and spaced */
+#tray > * {
+  padding: 0 6px;
+  transform: scale(1.05);
 }
 
 #tray > .passive {
@@ -142,5 +152,5 @@ label:focus {
 
 #tray > .needs-attention {
   -gtk-icon-effect: highlight;
-  background-color: #BF616A;
+  background-color: #bf616a;
 }
