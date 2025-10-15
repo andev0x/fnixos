@@ -33,5 +33,8 @@
   # Wallpaper directory
   xdg.configFile."wallpapers".source = ./wallpapers;
 
+  # assets (cursor, additional images)
+  xdg.configFile."assets".source = ./assets;
+
   home.stateVersion = "25.05";
 }
