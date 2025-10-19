@@ -11,11 +11,11 @@
     "format": "{icon}",
     "format-icons": {
       "default": "󰧞",
-      "1": "1",
-      "2": "2",
-      "3": "3",
-      "4": "4",
-      "5": "5"
+      "1": "󰧟",
+      "2": "󰧢",
+      "3": "󰧥",
+      "4": "󰧨",
+      "5": "󰧫"
     },
     "persistent_workspaces": {
         "1": [],
@@ -30,10 +30,7 @@
     "format": "󰣇",
     "tooltip": true,
     "tooltip-format": "Power Menu",
-    // Clicking this requires a script to show a power menu.
-    // For example, you could install 'wlogout' and set:
-    // "on-click": "wlogout"
-    "on-click": "echo 'Power menu script needed'"
+    "on-click": "wlogout"
   },
 
   "cpu": {
@@ -49,7 +46,7 @@
   },
   
   "clock": {
-    "format": "{:%I:%M %p}",
+    "format": "󰥔 {:%I:%M %p}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   },
   

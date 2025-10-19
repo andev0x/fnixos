@@ -10,6 +10,16 @@
     userEmail = "andev@example.com";
   };
 
+  # Cursor configuration
+  home.pointerCursor = {
+    name = "Adwaita";
+    size = 16;
+    package = pkgs.gnome.adwaita-icon-theme;
+  };
+
+  # Font configuration
+  fonts.fontconfig.enable = true;
+
   # Terminal configuration
   programs.kitty.enable = false;
   programs.alacritty.enable = true;
@@ -21,6 +31,7 @@
     lazygit delta gitui
     ranger lf
     starship
+    nerd-fonts
   ];
 
   # Waybar configuration
