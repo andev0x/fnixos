@@ -14,7 +14,7 @@
   home.pointerCursor = {
     name = "Adwaita";
     size = 16;
-    package = pkgs.gnome.adwaita-icon-theme;
+    package = pkgs.adwaita-icon-theme;
   };
 
   # Font configuration
