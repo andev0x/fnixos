@@ -40,6 +40,7 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
+    backupFileExtension = "backup";
     users.andev = import ../../home/default.nix;
   };
 
