@@ -1,72 +1,65 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 30,
+  "height": 42,
   "spacing": 4,
-  "modules-left": ["hyprland/workspaces", "hyprland/window"],
-  "modules-center": ["clock"],
-  "modules-right": ["pulseaudio", "network", "battery", "cpu", "memory", "tray"],
+  "modules-left": ["custom-power", "cpu", "memory"],
+  "modules-center": ["hyprland/workspaces"],
+  "modules-right": ["pulseaudio", "clock", "battery"],
   
   "hyprland/workspaces": {
-    "disable-scroll": true,
-    "all-outputs": true,
     "format": "{icon}",
     "format-icons": {
-      "1": "󰈹",
-      "2": "󰈹",
-      "3": "󰈹",
-      "4": "󰈹",
-      "5": "󰈹",
-      "urgent": "󰈹",
-      "focused": "󰈹",
-      "default": "󰈹"
+      "default": "󰧞",
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5"
+    },
+    "persistent_workspaces": {
+        "1": [],
+        "2": [],
+        "3": [],
+        "4": [],
+        "5": []
     }
   },
   
-  "hyprland/window": {
-    "format": "{}",
-    "separate-outputs": true
-  },
-  
-  "clock": {
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format-alt": "{:%Y-%m-%d}"
-  },
-  
-  "pulseaudio": {
-    "format": "{icon} {volume}%",
-    "format-bluetooth": "{icon} {volume}%",
-    "format-bluetooth-muted": "󰸈",
-    "format-muted": "󰸈",
-    "format-icons": {
-      "headphone": "󰋋",
-      "hands-free": "󰋋",
-      "headset": "󰋋",
-      "phone": "󰄜",
-      "portable": "󰦧",
-      "car": "󰄋",
-      "default": ["󰕿", "󰖀", "󰕾"]
-    },
-    "on-click": "pavucontrol"
+  "custom-power": {
+    "format": "󰣇",
+    "tooltip": true,
+    "tooltip-format": "Power Menu",
+    // Clicking this requires a script to show a power menu.
+    // For example, you could install 'wlogout' and set:
+    // "on-click": "wlogout"
+    "on-click": "echo 'Power menu script needed'"
   },
 
   "cpu": {
     "format": "󰻠 {usage}%",
-    "max-length": 6
+    "tooltip": true,
+    "tooltip-format": "CPU: {usage}%"
   },
 
   "memory": {
-    "format": "󰦨 {used_percent}%",
-    "max-length": 6
+    "format": "󰦨 {used:0.1f}G",
+    "tooltip": true,
+    "tooltip-format": "Memory: {used:0.1f}G / {total:0.1f}G"
   },
   
-  "network": {
-    "format-wifi": "󰤨 {signalStrength}%",
-    "format-ethernet": "󰈀 {ifname}",
-    "format-linked": "󰈀 {ifname}",
-    "format-disconnected": "󰤭",
-    "format-alt": "{ifname}: {ipaddr}/{cidr}",
-    "tooltip-format": "{essid} - {ipaddr}"
+  "clock": {
+    "format": "{:%I:%M %p}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+  },
+  
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "󰸈 Muted",
+    "format-icons": {
+      "default": ["", "", ""]
+    },
+    "on-click": "pavucontrol"
   },
   
   "battery": {
@@ -77,11 +70,6 @@
     "format": "{icon} {capacity}%",
     "format-charging": "󰂄 {capacity}%",
     "format-plugged": "󰂄 {capacity}%",
-    "format-alt": "{time} {icon}",
     "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
-  },
-  
-  "tray": {
-    "spacing": 10
   }
 }
