@@ -27,6 +27,10 @@
     grim            # Screenshot tool
     slurp           # Region selector
     wl-clipboard    # Clipboard utilities
+    hyprlock        # Screen locker
+    hypridle        # Idle daemon
+    hyprpicker      # Color picker
+    cliphist        # Clipboard manager
 
     # Authentication
     kdePackages.polkit-kde-agent-1
@@ -34,10 +38,12 @@
     # Essential utilities
     wofi            # Application launcher
     wlogout         # Logout menu
+    playerctl       # Media control
     mesa
     mesa.drivers
     vulkan-tools
     glxinfo
+    jq              # JSON parser for scripts
   ];
 
   # Security policy kit
@@ -48,4 +54,14 @@
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
+
+  # Hyprland services
+  services.hypridle.enable = true;
+  
+  # Waybar service (optional - can also be started from hyprland.conf)
+  # Uncomment if you want waybar to run as a systemd service
+  # systemd.user.services.waybar = {
+  #   enable = true;
+  #   wantedBy = [ "hyprland-session.target" ];
+  # };
 }

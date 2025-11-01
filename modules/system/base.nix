@@ -9,6 +9,7 @@
     brightnessctl  # Brightness control
     wofi           # App launcher
     ranger         # Terminal file manager
+    libnotify      # Notification daemon and utilities
   ];
 
   # Networking

@@ -14,6 +14,9 @@
       nixosConfigurations = {
         vm-m1 = nixpkgs.lib.nixosSystem {
           inherit system;
+          specialArgs = {
+            inherit home-manager;
+          };
           modules = [
             ./hosts/vm-m1/configuration.nix
             home-manager.nixosModules.home-manager
