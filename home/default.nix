@@ -66,11 +66,26 @@
   # Waybar configuration
   xdg.configFile."waybar/config.jsonc".source = ./waybar/config.jsonc;
   xdg.configFile."waybar/style.css".source = ./waybar/style.css;
-  xdg.configFile."waybar/modules".source = ./waybar/modules;
-  xdg.configFile."waybar/includes".source = ./waybar/includes;
-  xdg.configFile."waybar/layouts".source = ./waybar/layouts;
-  xdg.configFile."waybar/menus".source = ./waybar/menus;
-  xdg.configFile."waybar/styles".source = ./waybar/styles;
+  xdg.configFile."waybar/modules" = {
+    recursive = true;
+    source = ./waybar/modules;
+  };
+  xdg.configFile."waybar/includes" = {
+    recursive = true;
+    source = ./waybar/includes;
+  };
+  xdg.configFile."waybar/layouts" = {
+    recursive = true;
+    source = ./waybar/layouts;
+  };
+  xdg.configFile."waybar/menus" = {
+    recursive = true;
+    source = ./waybar/menus;
+  };
+  xdg.configFile."waybar/styles" = {
+    recursive = true;
+    source = ./waybar/styles;
+  };
   xdg.configFile."waybar/theme.css".source = ./waybar/theme.css;
   xdg.configFile."waybar/user-style.css".source = ./waybar/user-style.css;
 
@@ -88,11 +103,26 @@
   xdg.configFile."hypr/hyprlock.conf".source = ./hypr/hyprlock.conf;
   xdg.configFile."hypr/nvidia.conf".source = ./hypr/nvidia.conf;
   xdg.configFile."hypr/pyprland.toml".source = ./hypr/pyprland.toml;
-  xdg.configFile."hypr/animations".source = ./hypr/animations;
-  xdg.configFile."hypr/shaders".source = ./hypr/shaders;
-  xdg.configFile."hypr/themes".source = ./hypr/themes;
-  xdg.configFile."hypr/workflows".source = ./hypr/workflows;
-  xdg.configFile."hypr/hyprlock".source = ./hypr/hyprlock;
+  xdg.configFile."hypr/animations" = {
+    recursive = true;
+    source = ./hypr/animations;
+  };
+  xdg.configFile."hypr/shaders" = {
+    recursive = true;
+    source = ./hypr/shaders;
+  };
+  xdg.configFile."hypr/themes" = {
+    recursive = true;
+    source = ./hypr/themes;
+  };
+  xdg.configFile."hypr/workflows" = {
+    recursive = true;
+    source = ./hypr/workflows;
+  };
+  xdg.configFile."hypr/hyprlock" = {
+    recursive = true;
+    source = ./hypr/hyprlock;
+  };
 
   # QT6 configuration
   xdg.configFile."qt6ct/qt6ct.conf".source = ./qt6ct/qt6ct.conf;
@@ -103,11 +133,20 @@
 
   # Fastfetch configuration
   xdg.configFile."fastfetch/config.jsonc".source = ./fastfetch/config.jsonc;
-  xdg.configFile."fastfetch/logo".source = ./fastfetch/logo;
+  xdg.configFile."fastfetch/logo" = {
+    recursive = true;
+    source = ./fastfetch/logo;
+  };
 
   # Data directories (wallpapers and assets)
-  xdg.dataFile."wallpapers".source = ./wallpapers;
-  xdg.dataFile."assets".source = ./assets;
+  xdg.dataFile."wallpapers" = {
+    recursive = true;
+    source = ./wallpapers;
+  };
+  xdg.dataFile."assets" = {
+    recursive = true;
+    source = ./assets;
+  };
 
   # ─────────────────────────────
   # Version tracking
