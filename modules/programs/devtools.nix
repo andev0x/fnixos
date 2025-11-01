@@ -22,18 +22,18 @@
     git-lfs        # Git large file storage
 
     # Web browsers
-    #firefox        # Primary browser
-    qutebrowser
+    firefox        # Primary browser (matches variables.conf)
+    qutebrowser    # Alternative browser
 
     # Terminal and shell
     tmux           # Terminal multiplexer
     zsh            # Shell
     starship       # Fast shell prompt
-    alacritty
-    xorg.xhost
-    kitty
-    wezterm
-    ghostty
+    alacritty      # Terminal emulator (primary - matches home/default.nix)
+    # Terminal alternatives (uncomment if needed):
+    # kitty
+    # wezterm
+    # ghostty
 
     # File management
     ranger         # Terminal file manager

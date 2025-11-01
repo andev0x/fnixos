@@ -46,8 +46,9 @@
 
   # Services
   services.openssh.enable = true;
-  services.qemuGuest.enable = true;
-  services.vmwareGuest.enable = true;
+  # Guest services - only enable the one you're using
+  # services.qemuGuest.enable = true;  # For QEMU/KVM
+  services.vmwareGuest.enable = true;  # For VMware Fusion
   programs.xwayland.enable = true;
 
   # Boot configuration

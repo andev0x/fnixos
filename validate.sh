@@ -39,7 +39,7 @@ required_files=(
     "modules/desktop/hyprland.nix"
     "modules/programs/devtools.nix"
     "home/default.nix"
-    "home/waybar/config"
+    "home/waybar/config.jsonc"
     "home/waybar/style.css"
     "home/hypr/hyprland.conf"
 )

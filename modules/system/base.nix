@@ -1,6 +1,6 @@
 { pkgs, ... }: {
-  # Shell
-  programs.zsh.enable = true;
+  # Shell configuration - handled by modules/programs/devtools.nix
+  # programs.zsh.enable = true;  # Moved to devtools.nix
 
   # Essential system packages
   environment.systemPackages = with pkgs; [
@@ -23,9 +23,8 @@
     pulse.enable = true;
   };
 
-  # Virtualization guest tools (note: services.qemuGuest → virtualisation.qemuGuest)
-  #virtualisation.qemuGuest.enable = true;
-  services.vmwareGuest.enable = true;
+  # Virtualization guest tools - configured in hosts/vm-m1/configuration.nix
+  # services.vmwareGuest.enable = true;  # Moved to hosts/vm-m1/configuration.nix
 
   # Security - allow wheel group sudo without password
   security.sudo.wheelNeedsPassword = false;
@@ -41,10 +40,11 @@
     "vm.swappiness" = 10;
   };
 
-  # Swap (set to empty list if you don't want swap)
-  swapDevices = [
-    { device = "/swapfile"; size = 2048; } # 2GB swap file
-  ];
+  # Swap configuration - handled by hardware-configuration.nix
+  # Uncomment if you need a swapfile instead of a swap device:
+  # swapDevices = [
+  #   { device = "/swapfile"; size = 2048; } # 2GB swap file
+  # ];
 
   # Disable unnecessary services
   services.printing.enable = false;  # cups → printing

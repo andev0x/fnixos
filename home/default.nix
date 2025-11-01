@@ -54,12 +54,13 @@
   # ─────────────────────────────
   # Config files and assets
   # ─────────────────────────────
-  xdg.configFile."waybar/config".source = ./waybar/config;
+  xdg.configFile."waybar/config.jsonc".source = ./waybar/config.jsonc;
   xdg.configFile."waybar/style.css".source = ./waybar/style.css;
 
   xdg.configFile."hypr/hyprland.conf".source = ./hypr/hyprland.conf;
-  xdg.configFile."wallpapers".source = ./wallpapers;
-  xdg.configFile."assets".source = ./assets;
+  xdg.configFile."hypr/variables.conf".source = ./hypr/variables.conf;
+  xdg.dataFile."wallpapers".source = ./wallpapers;
+  xdg.dataFile."assets".source = ./assets;
 
   # ─────────────────────────────
   # Version tracking
