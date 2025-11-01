@@ -1,12 +1,7 @@
-{ pkgs, ... }:
-
-{
+{ pkgs, ... }: {
   home.username = "andev";
   home.homeDirectory = "/home/andev";
 
-  # ─────────────────────────────
-  # Shell and Git
-  # ─────────────────────────────
   programs.zsh.enable = true;
 
   programs.git = {
@@ -15,42 +10,31 @@
     userEmail = "andev@example.com";
   };
 
-  # ─────────────────────────────
   # Cursor configuration
-  # ─────────────────────────────
   home.pointerCursor = {
     name = "Adwaita";
     size = 16;
     package = pkgs.adwaita-icon-theme;
   };
 
-  # ─────────────────────────────
-  # Fonts
-  # ─────────────────────────────
+  # Font configuration
   fonts.fontconfig.enable = true;
 
-  # ─────────────────────────────
-  # Terminal programs
-  # ─────────────────────────────
+  # Terminal configuration
   programs.kitty.enable = false;
   programs.alacritty.enable = true;
   programs.tmux.enable = true;
 
-  # ─────────────────────────────
-  # User packages
-  # ─────────────────────────────
+  # Minimal packages
   home.packages = with pkgs; [
-    # CLI utilities
     fzf bat eza
     lazygit delta gitui
     ranger lf
     starship
-
-    # Fonts (fixed)
-    nerd-fonts.jetbrains-mono
-    nerd-fonts.fira-code
+    nerd-fonts
   ];
 
+<<<<<<< HEAD
   # ─────────────────────────────
   # Starship configuration
   # ─────────────────────────────
@@ -65,6 +49,10 @@
   
   # Waybar configuration
   xdg.configFile."waybar/config.jsonc".source = ./waybar/config.jsonc;
+=======
+  # Waybar configuration
+  xdg.configFile."waybar/config".source = ./waybar/config;
+>>>>>>> parent of ab6f306 (feat(home): update default.nix)
   xdg.configFile."waybar/style.css".source = ./waybar/style.css;
   xdg.configFile."waybar/modules" = {
     recursive = true;
@@ -91,6 +79,7 @@
 
   # Hyprland configuration
   xdg.configFile."hypr/hyprland.conf".source = ./hypr/hyprland.conf;
+<<<<<<< HEAD
   xdg.configFile."hypr/variables.conf".source = ./hypr/variables.conf;
   xdg.configFile."hypr/keybindings.conf".source = ./hypr/keybindings.conf;
   xdg.configFile."hypr/windowrules.conf".source = ./hypr/windowrules.conf;
@@ -147,9 +136,14 @@
     recursive = true;
     source = ./assets;
   };
+=======
 
-  # ─────────────────────────────
-  # Version tracking
-  # ─────────────────────────────
+  # Wallpaper directory
+  xdg.configFile."wallpapers".source = ./wallpapers;
+
+  # assets (cursor, additional images)
+  xdg.configFile."assets".source = ./assets;
+>>>>>>> parent of ab6f306 (feat(home): update default.nix)
+
   home.stateVersion = "25.05";
 }
