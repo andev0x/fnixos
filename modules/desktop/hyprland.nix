@@ -18,7 +18,7 @@
     emoji = [ "Noto Color Emoji" ];
   };
 
-  # Essential Wayland packages - minimal set
+  # Essential Wayland packages - Professional setup
   environment.systemPackages = with pkgs; [
     # Core Wayland
     hyprland        # Window manager
@@ -27,6 +27,10 @@
     grim            # Screenshot tool
     slurp           # Region selector
     wl-clipboard    # Clipboard utilities
+    swappy          # Screenshot editor
+    dunst           # Notification daemon
+    rofi-wayland    # App launcher/switcher
+    rofi            # App launcher/switcher (fallback)
 
     # Authentication
     kdePackages.polkit-kde-agent-1
@@ -34,6 +38,8 @@
     # Essential utilities
     wofi            # Application launcher
     wlogout         # Logout menu
+    pavucontrol     # Audio control
+    brightnessctl   # Brightness control
     mesa
     mesa.drivers
     vulkan-tools

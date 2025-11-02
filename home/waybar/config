@@ -1,11 +1,15 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 30,
-  "spacing": 4,
+  "height": 35,
+  "spacing": 6,
+  "margin-top": 0,
+  "margin-bottom": 0,
+  "margin-left": 0,
+  "margin-right": 0,
   "modules-left": ["hyprland/workspaces", "hyprland/window"],
   "modules-center": ["clock"],
-  "modules-right": ["pulseaudio", "network", "battery", "tray"],
+  "modules-right": ["idle_inhibitor", "cpu", "memory", "temperature", "pulseaudio", "network", "battery", "tray"],
   
   "hyprland/workspaces": {
     "disable-scroll": true,
@@ -20,24 +24,60 @@
       "urgent": "󰈹",
       "focused": "󰈹",
       "default": "󰈹"
+    },
+    "persistent_workspaces": {
+      "*": 5
     }
   },
   
   "hyprland/window": {
-    "format": "{}",
-    "separate-outputs": true
+    "format": "{class}",
+    "separate-outputs": true,
+    "max-length": 50
   },
   
   "clock": {
+    "timezone": "Asia/Ho_Chi_Minh",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format-alt": "{:%Y-%m-%d}"
+    "format-alt": "{:%Y-%m-%d %H:%M}",
+    "format": "{:%H:%M:%S}",
+    "format-calendar": "<span color='#ffcc66'><b>{}</b></span>"
+  },
+  
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "󰒳",
+      "deactivated": "󰤻"
+    }
+  },
+  
+  "cpu": {
+    "format": "󰻠 {usage}%",
+    "tooltip": false,
+    "interval": 2
+  },
+  
+  "memory": {
+    "format": "󰍛 {percentage}%",
+    "tooltip-format": "Memory: {used:0.1f}G / {total:0.1f}G",
+    "interval": 2
+  },
+  
+  "temperature": {
+    "critical-threshold": 80,
+    "format": "{icon} {temperatureC}°C",
+    "format-icons": ["󰈑", "󰈒", "󰈓"],
+    "tooltip-format": "CPU: {temperatureC}°C"
   },
   
   "pulseaudio": {
     "format": "{icon} {volume}%",
-    "format-bluetooth": "{icon} {volume}%",
+    "format-bluetooth": "{icon} {volume}% {format_source}",
     "format-bluetooth-muted": "󰸈",
     "format-muted": "󰸈",
+    "format-source": "{volume}% 󰍬",
+    "format-source-muted": "󰍭",
     "format-icons": {
       "headphone": "󰋋",
       "hands-free": "󰋋",
@@ -47,7 +87,8 @@
       "car": "󰄋",
       "default": ["󰕿", "󰖀", "󰕾"]
     },
-    "on-click": "pavucontrol"
+    "on-click": "pavucontrol",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
   },
   
   "network": {
@@ -56,7 +97,8 @@
     "format-linked": "󰈀 {ifname}",
     "format-disconnected": "󰤭",
     "format-alt": "{ifname}: {ipaddr}/{cidr}",
-    "tooltip-format": "{essid} - {ipaddr}"
+    "tooltip-format": "{essid} - {ipaddr}",
+    "on-click-right": "nm-connection-editor"
   },
   
   "battery": {
@@ -68,10 +110,12 @@
     "format-charging": "󰂄 {capacity}%",
     "format-plugged": "󰂄 {capacity}%",
     "format-alt": "{time} {icon}",
-    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "tooltip-format": "{timeTo} remaining"
   },
   
   "tray": {
+    "icon-size": 20,
     "spacing": 10
   }
 }
