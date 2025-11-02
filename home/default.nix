@@ -14,8 +14,20 @@
   home.pointerCursor = {
     name = "Adwaita";
     size = 24;
-    package = pkgs.adwaita-icon-theme;
-    gtk.enable = true;
+    package = pkgs.gnome.adwaita-icon-theme;
+  };
+  
+  # GTK configuration
+  gtk = {
+    enable = true;
+    cursorTheme = {
+      name = "Adwaita";
+      package = pkgs.gnome.adwaita-icon-theme;
+    };
+    iconTheme = {
+      name = "Adwaita";
+      package = pkgs.gnome.adwaita-icon-theme;
+    };
   };
 
   # Terminal configuration
@@ -37,7 +49,7 @@
   ];
 
   # Waybar configuration
-  xdg.configFile."waybar/config".source = ./waybar/config;
+  xdg.configFile."waybar/config.jsonc".source = ./waybar/config;
   xdg.configFile."waybar/style.css".source = ./waybar/style.css;
 
   # Wofi configuration - Enhanced app menu
@@ -111,8 +123,8 @@
     };
   };
 
-  # Wallpaper directory
-  xdg.configFile."wallpapers".source = ./wallpapers;
+  # Wallpaper directory - use dataFile for wallpapers
+  xdg.dataFile."wallpapers".source = ./wallpapers;
 
   home.stateVersion = "25.05";
 }

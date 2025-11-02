@@ -29,8 +29,7 @@
     wl-clipboard    # Clipboard utilities
     swappy          # Screenshot editor
     dunst           # Notification daemon
-    rofi-wayland    # App launcher/switcher
-    rofi            # App launcher/switcher (fallback)
+    rofi-wayland    # App launcher/switcher (Wayland)
 
     # Authentication
     kdePackages.polkit-kde-agent-1
