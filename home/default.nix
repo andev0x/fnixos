@@ -14,7 +14,7 @@
   home.pointerCursor = {
     name = "Banana";
     size = 24;
-    package = pkgs.gnome.adwaita-icon-theme;
+    package = pkgs.adwaita-icon-theme;
   };
   
   # GTK configuration
@@ -22,11 +22,11 @@
     enable = true;
     cursorTheme = {
       name = "Banana";
-      package = pkgs.gnome.adwaita-icon-theme;
+      package = pkgs.adwaita-icon-theme;
     };
     iconTheme = {
       name = "Adwaita";
-      package = pkgs.gnome.adwaita-icon-theme;
+      package = pkgs.adwaita-icon-theme;
     };
   };
 
