@@ -14,7 +14,7 @@
   home.pointerCursor = {
     name = "Banana";
     size = 24;
-    package = pkgs.adwaita-icon-theme;
+    package = pkgs.papirus-icon-theme;
   };
   
   # GTK configuration
@@ -22,11 +22,11 @@
     enable = true;
     cursorTheme = {
       name = "Banana";
-      package = pkgs.adwaita-icon-theme;
+      package = pkgs.papirus-icon-theme;
     };
     iconTheme = {
-      name = "Adwaita";
-      package = pkgs.adwaita-icon-theme;
+      name = "Papirus";
+      package = pkgs.papirus-icon-theme;
     };
   };
 
@@ -110,7 +110,7 @@
         stack_duplicates = true;
         hide_duplicate_count = false;
         show_indicators = "yes";
-        icon_theme = "Adwaita";
+        icon_theme = "Papirus";
         sticky_history = "yes";
         history_length = 20;
       };
