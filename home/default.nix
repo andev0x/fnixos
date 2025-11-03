@@ -12,7 +12,7 @@
 
   # Cursor configuration - Banana Cursor (if available, fallback to Adwaita)
   home.pointerCursor = {
-    name = "Adwaita";
+    name = "Banana";
     size = 24;
     package = pkgs.gnome.adwaita-icon-theme;
   };
@@ -21,7 +21,7 @@
   gtk = {
     enable = true;
     cursorTheme = {
-      name = "Adwaita";
+      name = "Banana";
       package = pkgs.gnome.adwaita-icon-theme;
     };
     iconTheme = {
@@ -46,18 +46,28 @@
     dunst             # Notification daemon
     pavucontrol       # Audio control
     brightnessctl     # Brightness control
+    jq                # JSON parsing for Waybar custom module
   ];
 
   # Waybar configuration
   xdg.configFile."waybar/config.jsonc".source = ./waybar/config;
   xdg.configFile."waybar/style.css".source = ./waybar/style.css;
+  xdg.configFile."waybar/style-dark.css".source = ./waybar/style-dark.css;
+  xdg.configFile."waybar/style-light.css".source = ./waybar/style-light.css;
 
   # Wofi configuration - Enhanced app menu
   xdg.configFile."wofi/config".source = ./wofi/config;
   xdg.configFile."wofi/style.css".source = ./wofi/style.css;
+  xdg.configFile."wofi/style-dark.css".source = ./wofi/style-dark.css;
+  xdg.configFile."wofi/style-light.css".source = ./wofi/style-light.css;
 
   # Hyprland configuration
   xdg.configFile."hypr/hyprland.conf".source = ./hypr/hyprland.conf;
+
+  # Scripts
+  xdg.configFile."scripts/random-wall.sh" = { source = ./scripts/random-wall.sh; executable = true; };
+  xdg.configFile."scripts/active-app.sh" = { source = ./scripts/active-app.sh; executable = true; };
+  xdg.configFile."scripts/toggle-theme.sh" = { source = ./scripts/toggle-theme.sh; executable = true; };
 
   # Dunst notification daemon
   services.dunst = {
