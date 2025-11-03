@@ -2,6 +2,9 @@
 
 set -euo pipefail
 
+# Add a small delay to ensure the wallpaper directory is mounted
+sleep 1
+
 WALL_DIR="$HOME/.local/share/wallpapers"
 STATE_DIR="$HOME/.cache"
 LIST_FILE="$STATE_DIR/wallpaper_list.txt"
@@ -28,7 +31,7 @@ fi
 
 read -r IDX < "$INDEX_FILE" || IDX=0
 
-ACTION="${1:-random}"
+ACTION="${1:-default}"
 case "$ACTION" in
   next)
     IDX=$(( (IDX + 1) % ${#WALLS[@]} ))
@@ -36,8 +39,26 @@ case "$ACTION" in
   prev)
     IDX=$(( (IDX - 1 + ${#WALLS[@]}) % ${#WALLS[@]} ))
     ;;
-  random|*)
+  random)
     IDX=$(( RANDOM % ${#WALLS[@]} ))
+    ;;
+  default)
+    # Find the index of shisui.png
+    for i in "${!WALLS[@]}"; do
+      if [[ "${WALLS[$i]}" == *"/shisui.png"* ]]; then
+        IDX=$i
+        break
+      fi
+    done
+    ;;
+  *)
+    # Allow setting a specific wallpaper by name
+    for i in "${!WALLS[@]}"; do
+      if [[ "${WALLS[$i]}" == *"/$1"* ]]; then
+        IDX=$i
+        break
+      fi
+    done
     ;;
 esac
 
