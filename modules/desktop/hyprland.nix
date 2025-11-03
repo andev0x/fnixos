@@ -2,6 +2,10 @@
   # Hyprland window manager - pure Wayland setup
   programs.hyprland.enable = true;
 
+  # Stylix theming
+  stylix.enable = true;
+  stylix.theme = pkgs.stylix.themes.nord;
+
   # Minimal display manager (SDDM Wayland)
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;

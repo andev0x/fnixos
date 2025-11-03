@@ -6,8 +6,8 @@
 
   programs.git = {
     enable = true;
-    userName = "andev0x";
-    userEmail = "andev@example.com";
+    userName = "anvndev";
+    userEmail = "anvndev@gmail.com";
   };
 
   # Cursor configuration - Banana Cursor (if available, fallback to Adwaita)
