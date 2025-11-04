@@ -43,6 +43,10 @@
     users.andev = import ../../home/default.nix;
   };
 
+  # Ensure Stylix does not try to configure GNOME or KDE targets on this Hyprland-only system
+  stylix.targets.gnome.enable = false;
+  stylix.targets.kde.enable = false;
+
   # Services
   services.openssh.enable = true;
   services.qemuGuest.enable = true;
