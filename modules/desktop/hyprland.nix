@@ -5,6 +5,8 @@
   # Stylix theming
   stylix.enable = true;
   stylix.theme = pkgs.stylix.themes.nord;
+  # Disable GNOME-specific targets since this configuration uses Hyprland (no GNOME)
+  stylix.targets.gnome.enable = false;
 
   # Minimal display manager (SDDM Wayland)
   services.displayManager.sddm.enable = true;
