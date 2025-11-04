@@ -80,8 +80,7 @@ fnixos/
   ```
 
 ### Themes
-- The system uses Stylix for consistent theming
-- Nord color scheme is applied throughout
+The Nord color scheme is applied throughout (theming is handled manually for Hyprland)
 - Fonts: JetBrainsMono Nerd Font
 
 ### Key Bindings (Hyprland)
@@ -164,4 +163,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - [NixOS](https://nixos.org/) - The Linux distribution
 - [Hyprland](https://hyprland.org/) - The window manager
 - [Nord Theme](https://www.nordtheme.com/) - The color scheme
-- [Stylix](https://github.com/danth/stylix) - The theming system

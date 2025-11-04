@@ -5,10 +5,9 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    stylix.url = "github:danth/stylix";
-      };
+    };
 
-  outputs = { self, nixpkgs, home-manager, stylix, ... }:
+  outputs = { self, nixpkgs, home-manager, ... }:
     let
       system = "aarch64-linux";
     in {
@@ -18,7 +17,7 @@
           modules = [
             ./hosts/vm-m1/configuration.nix
             home-manager.nixosModules.home-manager
-            stylix.nixosModules.stylix
+            # no external theming module used
             {
               nixpkgs.config.allowUnfree = true;
               nix.settings.experimental-features = [ "nix-command" "flakes" ];
