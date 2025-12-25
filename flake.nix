@@ -2,7 +2,7 @@
   description = "fnixos - Optimized NixOS Flake for VMware Fusion ARM64 (Apple Silicon) with Hyprland";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -17,20 +17,20 @@
         config = {
           allowUnfree = true;
           # ARM64-specific optimizations
-          replaceStdenv = { pkgs }: pkgs.ccacheStdenv;
+          # replaceStdenv = { pkgs }: pkgs.ccacheStdenv;
         };
       };
     in {
       nixosConfigurations = {
         vm-m1 = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit pkgs; };
+          # specialArgs = { inherit pkgs; };
           modules = [
             ./hosts/vm-m1/configuration.nix
             home-manager.nixosModules.home-manager
             {
               nixpkgs.config.allowUnfree = true;
-              
+
               # Nix settings optimized for ARM64
               nix.settings = {
                 experimental-features = [ "nix-command" "flakes" ];
