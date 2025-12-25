@@ -35,6 +35,7 @@
     wezterm
     ghostty
 
+
     # File management
     ranger         # Terminal file manager
     fzf            # Fuzzy finder

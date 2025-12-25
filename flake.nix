@@ -2,7 +2,7 @@
   description = "fnixos - Optimized NixOS Flake for VMware Fusion ARM64 (Apple Silicon) with Hyprland";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs.url = "git+https://github.com/NixOS/nixpkgs?ref=nixos-24.11";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
