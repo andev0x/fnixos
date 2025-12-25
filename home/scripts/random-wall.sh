@@ -2,103 +2,127 @@
 
 set -euo pipefail
 
-# Add a small delay to ensure the wallpaper directory is mounted
-sleep 1
-
-# Log file for debugging
-LOG_FILE="$HOME/.cache/random-wall.log"
-echo "---" >> "$LOG_FILE"
-date >> "$LOG_FILE"
-
+# Wallpaper directory
 WALL_DIR="$HOME/.local/share/wallpapers"
 STATE_DIR="$HOME/.cache"
 LIST_FILE="$STATE_DIR/wallpaper_list.txt"
 INDEX_FILE="$STATE_DIR/wallpaper_index.txt"
+LOG_FILE="$STATE_DIR/random-wall.log"
 
-echo "WALL_DIR: $WALL_DIR" >> "$LOG_FILE"
-
+# Ensure directories exist
 mkdir -p "$STATE_DIR"
 
-# Build list if missing or empty
-if [ ! -s "$LIST_FILE" ]; then
-  echo "Wallpaper list not found, creating..." >> "$LOG_FILE"
-  find "$WALL_DIR" -maxdepth 1 -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) | sort > "$LIST_FILE" || true
-fi
+# Logging function
+log() {
+  echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" >> "$LOG_FILE"
+}
 
-mapfile -t WALLS < "$LIST_FILE" || true
+log "=== Wallpaper Script Started ==="
+log "Action: ${1:-default}"
 
-echo "Found ${#WALLS[@]} wallpapers" >> "$LOG_FILE"
-
-if [ ${#WALLS[@]} -eq 0 ]; then
-  echo "No wallpapers found in $WALL_DIR" >&2
-  echo "No wallpapers found in $WALL_DIR" >> "$LOG_FILE"
+# Check if wallpaper directory exists
+if [ ! -d "$WALL_DIR" ]; then
+  log "ERROR: Wallpaper directory not found: $WALL_DIR"
+  notify-send "Wallpaper Error" "Directory $WALL_DIR not found" -u critical
   exit 1
 fi
 
-# Initialize index
+# Build wallpaper list
+log "Building wallpaper list from $WALL_DIR"
+find "$WALL_DIR" -maxdepth 1 -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) 2>/dev/null | sort > "$LIST_FILE" || true
+
+# Read wallpapers into array
+mapfile -t WALLS < "$LIST_FILE" || true
+
+log "Found ${#WALLS[@]} wallpapers"
+
+if [ ${#WALLS[@]} -eq 0 ]; then
+  log "ERROR: No wallpapers found in $WALL_DIR"
+  notify-send "Wallpaper Error" "No wallpapers found in $WALL_DIR" -u critical
+  exit 1
+fi
+
+# Initialize or read current index
 if [ ! -f "$INDEX_FILE" ]; then
   echo 0 > "$INDEX_FILE"
 fi
 
 read -r IDX < "$INDEX_FILE" || IDX=0
 
+# Determine action
 ACTION="${1:-default}"
-echo "Action: $ACTION" >> "$LOG_FILE"
 
 case "$ACTION" in
   next)
     IDX=$(( (IDX + 1) % ${#WALLS[@]} ))
+    log "Action: Next wallpaper (index: $IDX)"
     ;;
   prev)
     IDX=$(( (IDX - 1 + ${#WALLS[@]}) % ${#WALLS[@]} ))
+    log "Action: Previous wallpaper (index: $IDX)"
     ;;
   random)
     IDX=$(( RANDOM % ${#WALLS[@]} ))
+    log "Action: Random wallpaper (index: $IDX)"
     ;;
   default)
-    # Find the index of shisui.png
+    # Find shisui.png or use first wallpaper
+    DEFAULT_IDX=0
     for i in "${!WALLS[@]}"; do
       if [[ "${WALLS[$i]}" == *"/shisui.png"* ]]; then
-        IDX=$i
+        DEFAULT_IDX=$i
         break
       fi
     done
+    IDX=$DEFAULT_IDX
+    log "Action: Default wallpaper (index: $IDX)"
     ;;
   *)
-    # Allow setting a specific wallpaper by name
+    # Try to find wallpaper by name
+    FOUND=0
     for i in "${!WALLS[@]}"; do
       if [[ "${WALLS[$i]}" == *"/$1"* ]]; then
         IDX=$i
+        FOUND=1
         break
       fi
     done
+    if [ $FOUND -eq 0 ]; then
+      log "WARNING: Wallpaper '$1' not found, using current"
+    else
+      log "Action: Set wallpaper to '$1' (index: $IDX)"
+    fi
     ;;
 esac
 
+# Save current index
 echo "$IDX" > "$INDEX_FILE"
 
+# Get selected wallpaper
 IMG="${WALLS[$IDX]}"
-echo "Selected wallpaper: $IMG" >> "$LOG_FILE"
-
-# Full path to swww
-SWWW_BIN="/run/current-system/sw/bin/swww"
+log "Selected wallpaper: $IMG"
 
 # Ensure swww is running
-if ! pgrep -x swww >/dev/null 2>&1; then
-  echo "swww not running, initializing..." >> "$LOG_FILE"
-  "$SWWW_BIN" init || true
+if ! pgrep -x swww-daemon >/dev/null 2>&1; then
+  log "swww-daemon not running, initializing..."
+  /run/current-system/sw/bin/swww init &
+  sleep 2
 fi
 
-# Apply image with smooth transition
-echo "Applying wallpaper with swww..." >> "$LOG_FILE"
-"$SWWW_BIN" img "$IMG" \
-  --transition-type any \
-  --transition-duration 1 \
+# Apply wallpaper
+log "Applying wallpaper..."
+if /run/current-system/sw/bin/swww img "$IMG" \
+  --transition-type fade \
+  --transition-duration 2 \
   --transition-fps 60 \
-  --resize crop
+  --resize crop 2>&1 | tee -a "$LOG_FILE"; then
+  log "SUCCESS: Wallpaper applied"
+  notify-send "Wallpaper Changed" "$(basename "$IMG")" -t 2000 -i "$IMG"
+else
+  log "ERROR: Failed to apply wallpaper"
+  notify-send "Wallpaper Error" "Failed to apply wallpaper" -u critical
+  exit 1
+fi
 
-echo "Wallpaper applied successfully" >> "$LOG_FILE"
-
+log "=== Wallpaper Script Finished ==="
 exit 0
-
-

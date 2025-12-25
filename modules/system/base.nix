@@ -11,10 +11,29 @@
     ranger
     pciutils
     usbutils
+    networkmanagerapplet
+    networkmanager
+    wirelesstools
   ];
 
-  # Networking
-  networking.networkmanager.enable = true;
+  # Networking with NetworkManager
+  networking = {
+    networkmanager = {
+      enable = true;
+      wifi = {
+        backend = "iwd";
+        powersave = false;
+      };
+      dns = "systemd-resolved";
+    };
+    wireless.enable = false; # Disable wpa_supplicant as we use NetworkManager
+  };
+
+  # Systemd-resolved for DNS
+  services.resolved = {
+    enable = true;
+    dnssec = "false";
+  };
 
   # Audio with PipeWire (optimized for low latency)
   security.rtkit.enable = true;

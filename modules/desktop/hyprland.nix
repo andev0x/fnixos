@@ -69,6 +69,9 @@
     vulkan-tools
     glxinfo
     wayland-utils
+    
+    # Cursor theme
+    banana-cursor
   ];
 
   # Security
@@ -110,5 +113,7 @@
     GDK_BACKEND = "wayland";
     CLUTTER_BACKEND = "wayland";
     SDL_VIDEODRIVER = "wayland";
+    XCURSOR_THEME = "Banana";
+    XCURSOR_SIZE = "24";
   };
 }

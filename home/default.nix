@@ -10,11 +10,13 @@
     userEmail = "anvndev@gmail.com";
   };
 
-  # Cursor configuration - Banana Cursor (if available, fallback to Adwaita)
+  # Banana Cursor configuration
   home.pointerCursor = {
     name = "Banana";
     size = 24;
-    package = pkgs.papirus-icon-theme;
+    package = pkgs.banana-cursor;
+    gtk.enable = true;
+    x11.enable = false;
   };
   
   # GTK configuration
@@ -22,40 +24,75 @@
     enable = true;
     cursorTheme = {
       name = "Banana";
-      package = pkgs.papirus-icon-theme;
+      size = 24;
+      package = pkgs.banana-cursor;
     };
     iconTheme = {
-      name = "Papirus";
+      name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;
     };
+    theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome-themes-extra;
+    };
+  };
+
+  # Qt configuration for Wayland
+  qt = {
+    enable = true;
+    platformTheme.name = "gtk";
+    style.name = "adwaita-dark";
   };
 
   # Terminal configuration
   programs.kitty.enable = false;
-  programs.alacritty.enable = true;
+  programs.alacritty = {
+    enable = true;
+    settings = {
+      window = {
+        opacity = 0.95;
+        padding = {
+          x = 10;
+          y = 10;
+        };
+      };
+      font = {
+        normal = {
+          family = "JetBrainsMono Nerd Font";
+          style = "Regular";
+        };
+        size = 11;
+      };
+      colors = {
+        primary = {
+          background = "#1e1e2e";
+          foreground = "#cdd6f4";
+        };
+      };
+    };
+  };
+
   programs.tmux.enable = true;
 
-  # Minimal packages
+  # Essential packages
   home.packages = with pkgs; [
     fzf bat eza
     lazygit delta gitui
     ranger lf
     starship
-    rofi-wayland      # For app switching
-    swww              # Wallpaper daemon
-    dunst             # Notification daemon
-    pavucontrol       # Audio control
-    brightnessctl     # Brightness control
-    jq                # JSON parsing for Waybar custom module
+    jq
+    # Network tools
+    networkmanagerapplet
+    nm-tray
   ];
 
   # Waybar configuration
-  xdg.configFile."waybar/config.jsonc".source = ./waybar/config;
+  xdg.configFile."waybar/config".source = ./waybar/config;
   xdg.configFile."waybar/style.css".source = ./waybar/style.css;
   xdg.configFile."waybar/style-dark.css".source = ./waybar/style-dark.css;
   xdg.configFile."waybar/style-light.css".source = ./waybar/style-light.css;
 
-  # Wofi configuration - Enhanced app menu
+  # Wofi configuration
   xdg.configFile."wofi/config".source = ./wofi/config;
   xdg.configFile."wofi/style.css".source = ./wofi/style.css;
   xdg.configFile."wofi/style-dark.css".source = ./wofi/style-dark.css;
@@ -65,9 +102,14 @@
   xdg.configFile."hypr/hyprland.conf".source = ./hypr/hyprland.conf;
 
   # Scripts
-  xdg.configFile."scripts/random-wall.sh" = { source = ./scripts/random-wall.sh; executable = true; };
-  xdg.configFile."scripts/active-app.sh" = { source = ./scripts/active-app.sh; executable = true; };
-  xdg.configFile."scripts/toggle-theme.sh" = { source = ./scripts/toggle-theme.sh; executable = true; };
+  xdg.configFile."scripts/random-wall.sh" = { 
+    source = ./scripts/random-wall.sh; 
+    executable = true; 
+  };
+  xdg.configFile."scripts/toggle-theme.sh" = { 
+    source = ./scripts/toggle-theme.sh; 
+    executable = true; 
+  };
 
   # Dunst notification daemon
   services.dunst = {
@@ -80,15 +122,11 @@
         height = 300;
         origin = "top-right";
         offset = "10x50";
-        scale = 0;
-        notification_limit = 10;
+        notification_limit = 5;
         progress_bar = true;
         progress_bar_height = 10;
         progress_bar_frame_width = 1;
-        progress_bar_min_width = 150;
-        progress_bar_max_width = 300;
         indicate_hidden = "yes";
-        transparency = 0;
         separator_height = 2;
         padding = 12;
         horizontal_padding = 12;
@@ -98,31 +136,25 @@
         sort = "yes";
         idle_threshold = 120;
         font = "JetBrainsMono Nerd Font 10";
-        line_height = 0;
         markup = "full";
-        format = "<b>%s</b>\n%b";
+        format = "<b>%s</b>\\n%b";
         alignment = "left";
         vertical_alignment = "center";
         icon_position = "left";
         word_wrap = "yes";
-        ellipsize = "middle";
-        ignore_newline = "no";
-        stack_duplicates = true;
-        hide_duplicate_count = false;
-        show_indicators = "yes";
-        icon_theme = "Papirus";
+        icon_theme = "Papirus-Dark";
         sticky_history = "yes";
         history_length = 20;
       };
       urgency_low = {
         background = "#2E3440";
         foreground = "#ECEFF4";
-        timeout = 10;
+        timeout = 5;
       };
       urgency_normal = {
         background = "#3B4252";
         foreground = "#ECEFF4";
-        timeout = 10;
+        timeout = 8;
       };
       urgency_critical = {
         background = "#BF616A";
@@ -133,7 +165,7 @@
     };
   };
 
-  # Wallpaper directory - use dataFile for wallpapers
+  # Wallpapers
   xdg.dataFile."wallpapers".source = ./wallpapers;
 
   home.stateVersion = "25.05";
