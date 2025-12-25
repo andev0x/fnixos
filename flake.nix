@@ -2,7 +2,7 @@
   description = "fnixos - Optimized NixOS Flake for VMware Fusion ARM64 (Apple Silicon) with Hyprland";
 
   inputs = {
-    nixpkgs.url = "git+https://github.com/NixOS/nixpkgs?ref=nixos-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,7 +24,7 @@
       nixosConfigurations = {
         vm-m1 = nixpkgs.lib.nixosSystem {
           inherit system;
-          # specialArgs = { inherit pkgs; };
+        # specialArgs = { inherit pkgs; };
           modules = [
             ./hosts/vm-m1/configuration.nix
             home-manager.nixosModules.home-manager
