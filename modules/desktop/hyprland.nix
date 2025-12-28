@@ -38,6 +38,9 @@
     mesa.drivers
     vulkan-tools
     glxinfo
+    
+    # Cursor theme
+    bibata-cursors  # Fallback cursor theme
   ];
 
   # Security policy kit
