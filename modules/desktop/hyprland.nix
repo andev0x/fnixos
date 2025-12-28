@@ -28,20 +28,8 @@
     slurp           # Region selector
     wl-clipboard    # Clipboard utilities
 
-    # Cursor theme
-    (pkgs.stdenv.mkDerivation {
-      name = "banana-cursor";
-      src = pkgs.fetchFromGitHub {
-        owner = "ful1e5";
-        repo = "banana-cursor";
-        rev = "v2.0.0";
-        sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
-      };
-      installPhase = ''
-        mkdir -p $out/share/icons
-        cp -r themes/* $out/share/icons/
-      '';
-    })
+    # Cursor theme - using a fun banana-like cursor
+    bibata-cursors  # Modern cursor theme with multiple variants
 
     # Authentication
     kdePackages.polkit-kde-agent-1
@@ -49,8 +37,6 @@
     # Essential utilities
     wofi            # Application launcher
     wlogout         # Logout menu
-    mesa
-    mesa.drivers
     vulkan-tools
     glxinfo
   ];

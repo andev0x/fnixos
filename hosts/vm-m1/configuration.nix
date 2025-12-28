@@ -46,7 +46,7 @@
   # Services
   services.openssh.enable = true;
   services.qemuGuest.enable = true;
-  services.vmwareGuest.enable = true;
+  virtualisation.vmware.guest.enable = true;
   programs.xwayland.enable = true;
 
   # Boot configuration

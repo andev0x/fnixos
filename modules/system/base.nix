@@ -23,9 +23,9 @@
     pulse.enable = true;
   };
 
-  # Virtualization guest tools (note: services.qemuGuest → virtualisation.qemuGuest)
+  # Virtualization guest tools
   #virtualisation.qemuGuest.enable = true;
-  services.vmwareGuest.enable = true;
+  virtualisation.vmware.guest.enable = true;
 
   # Security - allow wheel group sudo without password
   security.sudo.wheelNeedsPassword = false;
