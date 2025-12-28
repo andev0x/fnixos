@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # Wallpaper directory
-WALL_DIR="$HOME/.local/share/wallpapers"
+WALL_DIR="$HOME/.config/wallpapers"
 STATE_DIR="$HOME/.cache"
 LIST_FILE="$STATE_DIR/wallpaper_list.txt"
 INDEX_FILE="$STATE_DIR/wallpaper_index.txt"
