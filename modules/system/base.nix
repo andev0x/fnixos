@@ -6,49 +6,102 @@
   environment.systemPackages = with pkgs; [
     git wget curl htop
     unzip zip
-    brightnessctl  # Brightness control
-    wofi           # App launcher
-    ranger         # Terminal file manager
+    brightnessctl
+    wofi
+    ranger
+    pciutils
+    usbutils
+    networkmanagerapplet
+    networkmanager
+    wirelesstools
   ];
 
-  # Networking
-  networking.networkmanager.enable = true;
+  # Networking with NetworkManager
+  networking = {
+    networkmanager = {
+      enable = true;
+      wifi = {
+        backend = "iwd";
+        powersave = false;
+      };
+      dns = "systemd-resolved";
+    };
+    wireless.enable = false; # Disable wpa_supplicant as we use NetworkManager
+  };
 
-  # Audio (note: hardware.pulseaudio → services.pulseaudio in newer NixOS)
-  services.pulseaudio.enable = false;
+  # Systemd-resolved for DNS
+  services.resolved = {
+    enable = true;
+    dnssec = "false";
+  };
+
+  # Audio with PipeWire (optimized for low latency)
+  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    wireplumber.enable = true;
+    # Low latency configuration
+    extraConfig.pipewire = {
+      "context.properties" = {
+        "default.clock.rate" = 48000;
+        "default.clock.quantum" = 1024;
+        "default.clock.min-quantum" = 512;
+      };
+    };
   };
 
-  # Virtualization guest tools (note: services.qemuGuest → virtualisation.qemuGuest)
-  #virtualisation.qemuGuest.enable = true;
-  services.vmwareGuest.enable = true;
+  # VMware Fusion guest tools
+  virtualisation.vmware.guest = {
+    enable = true;
+    headless = false;
+  };
 
-  # Security - allow wheel group sudo without password
+  # Security
   security.sudo.wheelNeedsPassword = false;
 
-  # Performance optimizations
+  # ARM64 and VMware optimized kernel parameters
   boot.kernelParams = [
-    "mitigations=off"  # Disable CPU mitigations for better performance
-    "preempt=full"     # Better desktop responsiveness
+    "mitigations=off"
+    "preempt=full"
+    "transparent_hugepage=madvise"
+    "split_lock_detect=off"
+    # VMware-specific optimizations
+    "vmwgfx.enable_fbdev=1"
+    "intel_iommu=off"
   ];
 
-  # Memory management
+  # Optimized kernel settings for ARM64
   boot.kernel.sysctl = {
     "vm.swappiness" = 10;
+    "vm.vfs_cache_pressure" = 50;
+    "vm.dirty_background_ratio" = 5;
+    "vm.dirty_ratio" = 10;
+    "kernel.nmi_watchdog" = 0;
+    "kernel.sched_migration_cost_ns" = 5000000;
+    "kernel.sched_autogroup_enabled" = 1;
   };
 
-  # Swap (set to empty list if you don't want swap)
-  swapDevices = [
-    { device = "/swapfile"; size = 2048; } # 2GB swap file
-  ];
+  # Remove duplicate swap configuration (handled in hardware-configuration.nix)
+  swapDevices = [ ];
 
-  # Disable unnecessary services
-  services.printing.enable = false;  # cups → printing
+  # Disable unnecessary services for VM
+  services.printing.enable = false;
   services.avahi.enable = false;
   services.udisks2.enable = false;
   services.blueman.enable = false;
+
+  # Optimize for ARM64 performance
+  powerManagement = {
+    enable = true;
+    powertop.enable = false; # Disable for VM
+  };
+
+  # Faster boot
+  systemd.services.NetworkManager-wait-online.enable = false;
+  systemd.extraConfig = ''
+    DefaultTimeoutStopSec=10s
+  '';
 }

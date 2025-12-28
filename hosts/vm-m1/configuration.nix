@@ -13,7 +13,7 @@
   time.timeZone = "Asia/Ho_Chi_Minh";
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # Additional locales
+  # Locales
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
     LC_IDENTIFICATION = "en_US.UTF-8";
@@ -30,7 +30,6 @@
   users.users.andev = {
     isNormalUser = true;
     description = "andev0x";
-    #services.seatd.enable = true;
     extraGroups = [ "wheel" "networkmanager" "video" "input" "audio" "docker" ];
     shell = pkgs.zsh;
     initialPassword = "hello";
@@ -44,18 +43,32 @@
   };
 
   # Services
-  services.openssh.enable = true;
-  services.qemuGuest.enable = true;
-  services.vmwareGuest.enable = true;
+  services.openssh = {
+    enable = true;
+    settings = {
+      PermitRootLogin = "no";
+      PasswordAuthentication = true;
+    };
+  };
+
+  # XWayland support
   programs.xwayland.enable = true;
 
-  # Boot configuration
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # Boot configuration - optimized
+  boot.loader = {
+    systemd-boot = {
+      enable = true;
+      configurationLimit = 10;
+      editor = false;
+    };
+    efi.canTouchEfiVariables = true;
+    timeout = 3;
+  };
 
   # Nix configuration
   nix.settings = {
     auto-optimise-store = true;
+    warn-dirty = false;
   };
 
   # Garbage collection
@@ -63,6 +76,22 @@
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than 7d";
+  };
+
+  # System optimization
+  systemd.services = {
+    # Faster shutdown
+    "user@".serviceConfig = {
+      Delegate = "yes";
+    };
+  };
+
+  # Disable some unnecessary services for VM
+  documentation = {
+    enable = true;
+    doc.enable = false;
+    man.enable = true;
+    dev.enable = false;
   };
 
   system.stateVersion = "25.05";

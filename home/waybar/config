@@ -1,29 +1,42 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 30,
-  "spacing": 4,
+  "height": 36,
+  "spacing": 8,
+  "margin-top": 5,
+  "margin-bottom": 0,
+  "margin-left": 10,
+  "margin-right": 10,
   "modules-left": ["hyprland/workspaces", "hyprland/window"],
   "modules-center": ["clock"],
-  "modules-right": ["pulseaudio", "network", "battery", "tray"],
+  "modules-right": ["cpu", "memory", "pulseaudio", "network", "tray"],
   
   "hyprland/workspaces": {
-    "disable-scroll": true,
+    "disable-scroll": false,
     "all-outputs": true,
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
     "format": "{icon}",
     "format-icons": {
-      "1": "󰈹",
-      "2": "󰈹",
-      "3": "󰈹",
-      "4": "󰈹",
-      "5": "󰈹",
-      "urgent": "󰈹",
-      "focused": "󰈹",
-      "default": "󰈹"
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6",
+      "7": "7",
+      "8": "8",
+      "9": "9",
+      "active": "",
+      "default": ""
+    },
+    "persistent-workspaces": {
+      "*": [1, 2, 3, 4, 5]
     }
   },
   
   "hyprland/window": {
+<<<<<<< HEAD
     "format": "{class} {title}",
     "icon": true,
     "icon-size": 16,
@@ -45,52 +58,75 @@
     },
     "separate-outputs": true,
     "max-length": 50
+=======
+    "format": "{}",
+    "separate-outputs": true,
+    "max-length": 50,
+    "rewrite": {
+      "(.*) — Mozilla Firefox": "🌎 $1",
+      "(.*) - qutebrowser": "🌎 $1",
+      "(.*)Chromium(.*)": "🌎 Chromium",
+      "(.*)Alacritty(.*)": " Terminal"
+    }
+>>>>>>> main
   },
   
   "clock": {
+    "timezone": "Asia/Ho_Chi_Minh",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format-alt": "{:%Y-%m-%d}"
+    "format": " {:%H:%M}",
+    "format-alt": " {:%Y-%m-%d}",
+    "interval": 60
+  },
+  
+  "cpu": {
+    "format": " {usage}%",
+    "tooltip": true,
+    "interval": 5,
+    "on-click": "alacritty -e htop"
+  },
+  
+  "memory": {
+    "format": " {percentage}%",
+    "tooltip-format": "RAM: {used:0.1f}G / {total:0.1f}G\nSwap: {swapUsed:0.1f}G / {swapTotal:0.1f}G",
+    "interval": 5,
+    "on-click": "alacritty -e htop"
   },
   
   "pulseaudio": {
     "format": "{icon} {volume}%",
     "format-bluetooth": "{icon} {volume}%",
-    "format-bluetooth-muted": "󰸈",
-    "format-muted": "󰸈",
+    "format-bluetooth-muted": " {icon}",
+    "format-muted": " {volume}%",
     "format-icons": {
-      "headphone": "󰋋",
-      "hands-free": "󰋋",
-      "headset": "󰋋",
-      "phone": "󰄜",
-      "portable": "󰦧",
-      "car": "󰄋",
-      "default": ["󰕿", "󰖀", "󰕾"]
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", ""]
     },
-    "on-click": "pavucontrol"
+    "on-click": "pavucontrol",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "scroll-step": 5
   },
   
   "network": {
-    "format-wifi": "󰤨 {signalStrength}%",
-    "format-ethernet": "󰈀 {ifname}",
-    "format-linked": "󰈀 {ifname}",
-    "format-disconnected": "󰤭",
-    "format-alt": "{ifname}: {ipaddr}/{cidr}",
-    "tooltip-format": "{essid} - {ipaddr}"
-  },
-  
-  "battery": {
-    "states": {
-      "warning": 30,
-      "critical": 15
-    },
-    "format": "{icon} {capacity}%",
-    "format-charging": "󰂄 {capacity}%",
-    "format-plugged": "󰂄 {capacity}%",
-    "format-alt": "{time} {icon}",
-    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    "interface": "en*",
+    "format-wifi": " {signalStrength}%",
+    "format-ethernet": " {ifname}",
+    "format-linked": " {ifname}",
+    "format-disconnected": " Disconnected",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)\n {ipaddr}/{cidr}",
+    "tooltip-format-ethernet": "{ifname}\n {ipaddr}/{cidr}",
+    "tooltip-format-disconnected": "Disconnected",
+    "on-click": "alacritty -e nmtui",
+    "on-click-right": "nm-connection-editor"
   },
   
   "tray": {
-    "spacing": 10
+    "icon-size": 18,
+    "spacing": 8
   }
 }

@@ -1,7 +1,7 @@
 { pkgs, ... }: {
-  # Development tools - minimal and essential
+  # Development tools - essential and optimized
   environment.systemPackages = with pkgs; [
-    # Compilers and build tools
+    # Build tools
     gcc
     gnumake
     cmake
@@ -17,52 +17,50 @@
     neovim
 
     # Development utilities
-    ripgrep        # Fast text search
-    fd             # Better find
-    git-lfs        # Git large file storage
+    ripgrep
+    fd
+    git-lfs
 
-    # Web browsers
-    #firefox        # Primary browser
+    # Web browser
     qutebrowser
 
-    # Terminal and shell
-    tmux           # Terminal multiplexer
-    zsh            # Shell
-    starship       # Fast shell prompt
+    # Terminal emulators
     alacritty
-    xorg.xhost
     kitty
-    wezterm
-    ghostty
+    tmux
 
     # File management
-    ranger         # Terminal file manager
-    fzf            # Fuzzy finder
-    bat            # Better cat
-    eza            # Better ls
+    ranger
+    fzf
+    bat
+    eza
+    
+    # System monitoring
     fastfetch
     iotop
     sysstat
   ];
 
-  # Shell aliases for better developer experience
+  # Shell aliases
   environment.shellAliases = {
-    vi = "vim";
+    vi = "nvim";
     vim = "nvim";
-    ll = "eza -la";
-    la = "eza -A";
-    l = "eza";
-    ls = "eza";
+    ll = "eza -la --icons";
+    la = "eza -A --icons";
+    l = "eza --icons";
+    ls = "eza --icons";
     grep = "rg";
     find = "fd";
     cat = "bat";
-    csg = "sudo nix-env --delete-generations +2 --profile /nix/var/nix/profiles/system";
-    cg = "sudo nix-collect-garbage -d";
-    nixdisk= "du -sh /nix/store";
-
+    
+    # NixOS shortcuts
+    rebuild = "sudo nixos-rebuild switch --flake /etc/nixos#vm-m1";
+    update = "sudo nix flake update /etc/nixos && sudo nixos-rebuild switch --flake /etc/nixos#vm-m1";
+    clean = "sudo nix-collect-garbage -d && sudo nix-store --optimise";
+    generations = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
   };
 
-  # Enable development features
+  # Neovim configuration
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -70,17 +68,41 @@
     viAlias = true;
   };
 
-  # Enable Zsh with basic configuration
+  # Zsh configuration
   programs.zsh = {
     enable = true;
     enableCompletion = true;
     autosuggestions.enable = true;
     syntaxHighlighting.enable = true;
-
+    ohMyZsh = {
+      enable = true;
+      plugins = [ "git" "sudo" "docker" "kubectl" ];
+      theme = "robbyrussell";
+    };
   };
 
-  # Enable Starship prompt
+  # Starship prompt
   programs.starship = {
     enable = true;
+    settings = {
+      add_newline = true;
+      character = {
+        success_symbol = "[➜](bold green)";
+        error_symbol = "[➜](bold red)";
+      };
+      directory = {
+        truncation_length = 3;
+        truncate_to_repo = true;
+      };
+    };
+  };
+
+  # Git configuration
+  programs.git = {
+    enable = true;
+    config = {
+      init.defaultBranch = "main";
+      pull.rebase = false;
+    };
   };
 }

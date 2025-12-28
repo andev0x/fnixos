@@ -1,0 +1,19 @@
+* {
+  font-family: "JetBrainsMono Nerd Font", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+window#waybar {
+  background: rgba(46, 52, 64, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid #5E81AC;
+  color: #ECEFF4;
+  transition-property: background-color;
+  transition-duration: 0.5s;
+}
+
+/* rest inherits from existing dark style */
+/* You can keep this minimal because we copy the full base style.css initially */
+
+
