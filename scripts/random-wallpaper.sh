@@ -3,11 +3,15 @@
 # Random wallpaper switcher for Hyprland
 # Selects a random image from the wallpapers directory and sets it using swww
 
-WALLPAPER_DIR="$HOME/.config/wallpapers"
-
-# Check if wallpaper directory exists
-if [ ! -d "$WALLPAPER_DIR" ]; then
-    echo "Error: Wallpaper directory $WALLPAPER_DIR does not exist"
+# Determine the wallpapers directory - try multiple possible locations
+if [ -d "$HOME/Documents/fnixos/home/wallpapers" ]; then
+    WALLPAPER_DIR="$HOME/Documents/fnixos/home/wallpapers"
+elif [ -d "/etc/nixos/home/wallpapers" ]; then
+    WALLPAPER_DIR="/etc/nixos/home/wallpapers"
+elif [ -d "$HOME/.config/wallpapers" ]; then
+    WALLPAPER_DIR="$HOME/.config/wallpapers"
+else
+    echo "Error: Wallpaper directory not found"
     exit 1
 fi
 

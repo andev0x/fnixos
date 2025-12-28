@@ -7,7 +7,6 @@
     git wget curl htop
     unzip zip
     brightnessctl  # Brightness control
-    wofi           # App launcher
     ranger         # Terminal file manager
   ];
 

@@ -35,7 +35,7 @@
     kdePackages.polkit-kde-agent-1
 
     # Essential utilities
-    wofi            # Application launcher
+    rofi-wayland    # Application launcher (Wayland version)
     wlogout         # Logout menu
     vulkan-tools
     glxinfo

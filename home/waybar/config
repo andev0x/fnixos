@@ -5,7 +5,7 @@
   "spacing": 4,
   "modules-left": ["hyprland/workspaces", "wlr/taskbar"],
   "modules-center": ["clock"],
-  "modules-right": ["pulseaudio", "network", "battery", "tray"],
+  "modules-right": ["cpu", "network", "pulseaudio", "battery", "tray"],
   
   "hyprland/workspaces": {
     "disable-scroll": true,
@@ -46,6 +46,12 @@
     "format-alt": "{:%Y-%m-%d}"
   },
   
+  "cpu": {
+    "format": " {usage}%",
+    "tooltip": true,
+    "interval": 2
+  },
+  
   "pulseaudio": {
     "format": "{icon} {volume}%",
     "format-bluetooth": "{icon} {volume}%",
@@ -64,12 +70,13 @@
   },
   
   "network": {
-    "format-wifi": "󰤨 {signalStrength}%",
-    "format-ethernet": "󰈀 {ifname}",
+    "format-wifi": "󰤨 {signalStrength}%  {bandwidthDownBytes}  {bandwidthUpBytes}",
+    "format-ethernet": "󰈀 {ifname}  {bandwidthDownBytes}  {bandwidthUpBytes}",
     "format-linked": "󰈀 {ifname}",
     "format-disconnected": "󰤭",
     "format-alt": "{ifname}: {ipaddr}/{cidr}",
-    "tooltip-format": "{essid} - {ipaddr}"
+    "tooltip-format": "{essid} - {ipaddr}\nDown: {bandwidthDownBytes} Up: {bandwidthUpBytes}",
+    "interval": 2
   },
   
   "battery": {
