@@ -68,10 +68,16 @@
     mesa.drivers
     vulkan-tools
     glxinfo
+<<<<<<< HEAD
+    
+    # Cursor theme
+    bibata-cursors  # Fallback cursor theme
+=======
     wayland-utils
     
     # Cursor theme
     banana-cursor
+>>>>>>> main
   ];
 
   # Security

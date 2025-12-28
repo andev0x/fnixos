@@ -36,6 +36,29 @@
   },
   
   "hyprland/window": {
+<<<<<<< HEAD
+    "format": "{class} {title}",
+    "icon": true,
+    "icon-size": 16,
+    "rewrite": {
+      "(.*) — Mozilla Firefox": "󰈹 $1",
+      "(.*)Mozilla Firefox": "󰈹 Firefox",
+      "(.*) - Google Chrome": "󰊯 $1",
+      "(.*)Google Chrome": "󰊯 Chrome",
+      "(.*) - Chromium": "󰊯 $1",
+      "(.*)Chromium": "󰊯 Chromium",
+      "(.*) - qutebrowser": "󰖟 $1",
+      "(.*)qutebrowser": "󰖟 qutebrowser",
+      "(.*)Alacritty": "󰆍 Alacritty",
+      "(.*)ranger": "󰉋 Ranger",
+      "(.*)nvim": " Neovim",
+      "(.*)lazygit": "󰊢 Lazygit",
+      "(.*)VSCode": "󰨞 VSCode",
+      "(.*)Code": "󰨞 Code"
+    },
+    "separate-outputs": true,
+    "max-length": 50
+=======
     "format": "{}",
     "separate-outputs": true,
     "max-length": 50,
@@ -45,6 +68,7 @@
       "(.*)Chromium(.*)": "🌎 Chromium",
       "(.*)Alacritty(.*)": " Terminal"
     }
+>>>>>>> main
   },
   
   "clock": {
