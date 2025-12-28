@@ -81,17 +81,18 @@ fi
 echo ""
 echo "🎨 Checking theming configuration..."
 
-# Check that Waybar style exists and hypr config is present
-if [ -f "home/waybar/style.css" ] || [ -f "home/waybar/style-dark.css" ]; then
-    print_status 0 "Waybar style found"
+# Check for Stylix configuration
+if grep -q "stylix" modules/desktop/hyprland.nix; then
+    print_status 0 "Stylix theming configured"
 else
-    print_warning "Waybar style not found"
+    print_status 1 "Stylix theming not configured"
 fi
 
-if grep -q "hyprland" modules/desktop/hyprland.nix; then
-    print_status 0 "Hyprland theming configured"
+# Check for Nord theme
+if grep -q "nordic\|nord" modules/desktop/hyprland.nix; then
+    print_status 0 "Nord theme configured"
 else
-    print_warning "Hyprland theming not explicitly configured"
+    print_warning "Nord theme not explicitly configured"
 fi
 
 echo ""

@@ -1,312 +1,167 @@
 # fnixos - NixOS Configuration for ARM64 Apple Silicon
 
-A highly optimized NixOS configuration for VMware Fusion on ARM64 Apple Silicon with Hyprland window manager. Features comprehensive Wi-Fi support, Banana cursor theme, automatic wallpaper management, and professional development tools.
+A minimal, performance-focused NixOS configuration optimized for VMware Fusion on ARM64 Apple Silicon with Hyprland window manager. Perfect for developers who prioritize speed, efficiency, and web browsing.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/andev0x/description-image-archive/refs/heads/main/fnixos/p1.png"  />
 </p>
 
-## Features
 
-- **ARM64 Optimized**: Specifically tuned for Apple Silicon processors
-- **Pure Hyprland**: Lightweight Wayland compositor with smooth animations
-- **Full Wi-Fi Support**: NetworkManager with iwd backend and nm-applet
-- **Banana Cursor Theme**: Beautiful cursor theme with proper GTK integration
-- **Smart Wallpapers**: Automatic wallpaper rotation with notifications
-- **Performance Focused**: Optimized kernel parameters and minimal bloat
-- **Developer Ready**: Complete development environment with modern tools
-- **Professional Shortcuts**: Intuitive keybindings for maximum productivity
+## 🚀 Features
 
-## Project Structure
+- **ARM64 Optimized**: Specifically configured for Apple Silicon
+- **Pure Hyprland**: No GNOME dependencies - lightweight Wayland compositor
+- **Performance Focused**: Optimized kernel parameters and minimal resource usage
+- **Developer Ready**: Comprehensive development tools and multiple browsers
+- **Web Browsing**: Qute, Firefox, Chromium, and Brave pre-installed
+- **Minimal & Fast**: Clean, logical configuration with performance optimizations
+- **Nord Theme**: Consistent Nord color scheme throughout
+
+## 📁 Project Structure
 
 ```
 fnixos/
-├── flake.nix                          # Main flake with ARM64 optimizations
-├── hosts/vm-m1/
-│   ├── configuration.nix              # System configuration
-│   └── hardware-configuration.nix     # Hardware & VM optimization
+├── flake.nix                    # Main flake configuration
+├── hosts/
+│   └── vm-m1/                   # VM M1 host configuration
+│       ├── configuration.nix    # Main system config
+│       └── hardware-configuration.nix
 ├── modules/
-│   ├── system/base.nix                # Base system with Wi-Fi support
-│   ├── desktop/hyprland.nix           # Hyprland with Banana cursor
-│   └── programs/devtools.nix          # Development tools
+│   ├── system/
+│   │   └── base.nix            # Base system packages and settings
+│   ├── desktop/
+│   │   └── hyprland.nix        # Hyprland and theming
+│   └── programs/
+│       └── devtools.nix        # Development tools
 └── home/
-    ├── default.nix                    # Home Manager with cursor config
-    ├── hypr/hyprland.conf             # Hyprland keybindings
-    ├── waybar/config                  # Status bar configuration
-    ├── scripts/
-    │   ├── random-wall.sh             # Smart wallpaper management
-    │   └── toggle-theme.sh            # Theme switching
-    └── wallpapers/                    # Your wallpaper collection
+    ├── default.nix             # Home Manager configuration
+    ├── waybar/                 # Status bar configuration
+    │   ├── config
+    │   └── style.css
+    ├── hypr/
+    │   └── hyprland.conf       # Hyprland window manager config
+    └── wallpapers/             # Wallpaper directory
+        └── README.md
 ```
 
-## Installation
+## 🛠️ Installation
 
-### 1. Clone Repository
-```bash
-git clone https://github.com/andev0x/fnixos.git /etc/nixos
-cd /etc/nixos
-```
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/andev0x/fnixos.git
+   cd fnixos
+   ```
 
-### 2. Update Configuration
-Edit `home/default.nix` and update your information:
-```nix
-home.username = "your-username";
-programs.git.userName = "your-name";
-programs.git.userEmail = "your-email@example.com";
-```
+2. **Deploy the system:**
+   ```bash
+   # Option 1: Use the deployment script (recommended)
+   ./deploy.sh
 
-### 3. Deploy System
-```bash
-# Recommended: Use deployment script
-sudo ./deploy.sh
+   # Option 2: Test the configuration first
+   ./test-build.sh
 
-# Or manually
-sudo nixos-rebuild switch --flake .#vm-m1
-```
+   # Option 3: Manual deployment
+   sudo nixos-rebuild switch --flake .#vm-m1 --extra-experimental-features nix-command --extra-experimental-features flakes
+   ```
 
-### 4. Post-Installation
-```bash
-# Reboot to apply all changes
-sudo reboot
+3. **Update your email in home configuration:**
+   Edit `home/default.nix` and update the git email:
+   ```nix
+   userEmail = "andev@example.com";
+   ```
 
-# After reboot, check Wi-Fi status
-nmcli device status
-nmcli device wifi list
-```
+## 🎨 Customization
 
-## Key Features
+### Wallpapers
+- Place your wallpapers in `home/wallpapers/`
+- Update `home/hypr/hyprland.conf` to use your wallpaper:
+  ```nix
+  exec-once = swww img ~/Pictures/wallpapers/your-wallpaper.jpg
+  ```
 
-### Wi-Fi Management
-- **NetworkManager**: Full Wi-Fi support with iwd backend
-- **nm-applet**: System tray indicator for easy network management
-- **nmtui**: Terminal UI for network configuration
-- **Shortcuts**: 
-  - `Super + Click Network Icon`: Open network settings
-  - Terminal: `nmtui` for text interface
+### Themes
+- The system uses Stylix for consistent theming
+- Nord color scheme is applied throughout
+- Fonts: JetBrainsMono Nerd Font
 
-### Banana Cursor Theme
-- Automatically installed and configured
-- Works in Wayland and GTK applications
-- Size: 24px (configurable in home/default.nix)
-- Environment variables properly set system-wide
+### Key Bindings (Hyprland)
+- `Super + Q`: Open terminal (Kitty)
+- `Super + C`: Close window
+- `Super + R`: Application launcher (Wofi)
+- `Super + V`: Toggle floating window
+- `Super + 1-5`: Switch workspaces
+- `Print`: Screenshot
 
-### Smart Wallpaper System
-```bash
-# Scripts automatically cycle wallpapers
-~/.config/scripts/random-wall.sh next      # Next wallpaper
-~/.config/scripts/random-wall.sh prev      # Previous wallpaper
-~/.config/scripts/random-wall.sh random    # Random wallpaper
-~/.config/scripts/random-wall.sh default   # Default (shisui.png)
+### Development Key Bindings
+- `Super + T`: Open Neovim in terminal
+- `Super + B`: Open Firefox (Browser)
+- `Super + Shift + B`: Open Chromium
+- `Super + G`: Open LazyGit
+- `Super + F`: Open Ranger file manager
+- `Super + E`: Open Ranger file manager
 
-# Wallpapers stored in:
-~/.local/share/wallpapers/
-```
+## 🔧 Development Tools
 
-### Waybar Status Bar
-- **Left**: Workspaces, Active window
-- **Center**: Clock with date
-- **Right**: CPU, Memory, Audio, Network, System tray
-- **Features**: Click modules to open relevant apps
-- **Network**: Shows Wi-Fi signal strength and SSID
+Pre-installed development tools:
+- **Editors**: Neovim (default), VS Code, Helix
+- **Languages**: Go, Rust, Python, Node.js, Deno
+- **Build Tools**: GCC, CMake, Make, Ninja
+- **Git Tools**: LazyGit, Delta, Gitui
+- **File Management**: Ranger, LF, FZF
+- **Terminal**: Kitty, Tmux, Zsh with Oh My Zsh
+- **Shell**: Starship prompt, useful aliases
+- **Browsers**: Firefox, Chromium, Brave, Qute
+- **Utilities**: ripgrep, fd, bat, exa, tree
 
-## Keybindings
-
-### Essential
-| Shortcut | Action |
-|----------|--------|
-| `Super + Return` / `Super + Q` | Terminal (Alacritty) |
-| `Super + Space` / `Super + R` | Application launcher |
-| `Super + B` | Browser (Qutebrowser) |
-| `Super + E` | File manager (Ranger) |
-| `Super + C` | Close window |
-| `Super + M` | Exit Hyprland |
-| `Super + F` | Fullscreen |
-| `Super + V` | Toggle floating |
-
-### Window Navigation
-| Shortcut | Action |
-|----------|--------|
-| `Super + Arrow Keys` | Move focus |
-| `Super + H/J/K/L` | Move focus (Vim style) |
-| `Super + Shift + Arrow Keys` | Move window |
-| `Super + Ctrl + Arrow Keys` | Resize window |
-
-### Workspaces
-| Shortcut | Action |
-|----------|--------|
-| `Super + 1-9` | Switch workspace |
-| `Super + Shift + 1-9` | Move window to workspace |
-| `Super + Tab` | Next workspace |
-| `Super + Shift + Tab` | Previous workspace |
-| `Super + S` | Toggle special workspace |
-
-### Wallpaper Control
-| Shortcut | Action |
-|----------|--------|
-| `Super + W` | Next wallpaper |
-| `Super + Shift + W` | Random wallpaper |
-| `Super + Ctrl + W` | Previous wallpaper |
-
-### Multimedia
-| Shortcut | Action |
-|----------|--------|
-| `Volume Up/Down` | Adjust volume |
-| `Volume Mute` | Toggle mute |
-| `Brightness Up/Down` | Adjust brightness |
-| `Print` | Screenshot area |
-| `Super + Print` | Screenshot full screen |
-
-### Development
-| Shortcut | Action |
-|----------|--------|
-| `Super + G` | LazyGit |
-| `Super + T` | Toggle theme |
-
-## Development Tools
-
-### Pre-installed
-- **Languages**: Go, Rust, Python, Node.js
-- **Build Tools**: GCC, Make, CMake
-- **Editors**: Neovim (default)
-- **Git Tools**: LazyGit, Delta, GitUI
-- **File Tools**: Ranger, FZF, Bat, Eza
-- **Terminals**: Alacritty, Kitty
-- **Shell**: Zsh with Oh-My-Zsh, Starship prompt
-
-### Useful Aliases
-```bash
-ll          # eza -la --icons
-vim         # nvim
-cat         # bat
-grep        # rg
-find        # fd
-rebuild     # Rebuild NixOS configuration
-update      # Update flake and rebuild
-clean       # Garbage collect and optimize
-generations # List system generations
-```
-
-## System Requirements
+## 📋 System Requirements
 
 - **Architecture**: ARM64 (aarch64-linux)
-- **Platform**: VMware Fusion on Apple Silicon (M1/M2/M3)
-- **RAM**: Minimum 4GB (8GB recommended)
-- **Storage**: 20GB minimum (40GB recommended)
-- **Network**: Wi-Fi adapter supported by Linux kernel
+- **Platform**: VMware Fusion on Apple Silicon
+- **Memory**: Minimum 4GB RAM
+- **Storage**: Minimum 20GB free space
 
-## Customization
+## 🔄 Updates
 
-### Change Wallpapers
-1. Add images to `~/.local/share/wallpapers/`
-2. Wallpapers auto-rotate on startup
-3. Use keybindings to cycle through them
-
-### Change Cursor Size
-Edit `home/default.nix`:
-```nix
-home.pointerCursor = {
-  name = "Banana";
-  size = 32;  # Change this value
-  package = pkgs.banana-cursor;
-};
-```
-
-### Change Theme Colors
-Edit `home/waybar/style-dark.css` and `home/waybar/style-light.css`
-Toggle between themes: `Super + T`
-
-### Modify Keybindings
-Edit `home/hypr/hyprland.conf` and customize the bindings
-
-## Troubleshooting
-
-### Wi-Fi Not Working
+To update your system:
 ```bash
-# Check NetworkManager status
-systemctl status NetworkManager
-
-# List available networks
-nmcli device wifi list
-
-# Connect to network
-nmcli device wifi connect "SSID" password "password"
-
-# Open network manager applet
-nm-applet &
+cd fnixos
+git pull
+sudo nixos-rebuild switch --flake .#vm-m1 --upgrade
 ```
 
-### Cursor Not Showing
+## 🐛 Troubleshooting
+
+### Common Issues
+
+1. **Build fails**: Check Nix version compatibility
+2. **Display issues**: Ensure VMware tools are properly installed
+3. **Audio not working**: Verify PipeWire is running
+
+### Logs
 ```bash
-# Check cursor environment
-echo $XCURSOR_THEME  # Should be "Banana"
-echo $XCURSOR_SIZE   # Should be "24"
+# System logs
+journalctl -u hyprland
+journalctl -u waybar
 
-# Restart Hyprland
-Super + M (exit) then login again
+# Home Manager logs
+home-manager logs
 ```
 
-### Wallpaper Not Loading
-```bash
-# Check wallpaper directory
-ls ~/.local/share/wallpapers/
+## 📝 License
 
-# Check script logs
-cat ~/.cache/random-wall.log
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-# Manually set wallpaper
-~/.config/scripts/random-wall.sh default
-```
+## 🤝 Contributing
 
-### Waybar Not Starting
-```bash
-# Check waybar logs
-journalctl --user -u waybar
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test the configuration
+5. Submit a pull request
 
-# Restart waybar
-pkill waybar && waybar &
-```
+## 🙏 Acknowledgments
 
-## Performance Optimizations
-
-### Applied Optimizations
-- **Kernel**: mitigations=off, preempt=full, transparent_hugepage
-- **Memory**: vm.swappiness=10, zram compression
-- **Filesystem**: noatime, nodiratime, discard
-- **Nix**: Binary cache, parallel builds, auto-optimize
-- **Graphics**: Mesa drivers, Vulkan support
-- **Audio**: Low-latency PipeWire configuration
-- **VMware**: Guest tools, optimized modules
-
-## Updates
-
-### Update System
-```bash
-cd /etc/nixos
-sudo nix flake update
-sudo nixos-rebuild switch --flake .#vm-m1
-```
-
-### Update Specific Input
-```bash
-sudo nix flake lock --update-input nixpkgs
-sudo nixos-rebuild switch --flake .#vm-m1
-```
-
-## License
-
-MIT License - see LICENSE file for details
-
-## Acknowledgments
-
-- [NixOS](https://nixos.org/) - The purely functional Linux distribution
-- [Hyprland](https://hyprland.org/) - Dynamic tiling Wayland compositor
-- [Waybar](https://github.com/Alexays/Waybar) - Highly customizable status bar
-- [Banana Cursor](https://github.com/ful1e5/Banana-cursor) - Beautiful cursor theme
-- Community contributors and testers
-
----
-
-**Author**: anvndev  
-**Repository**: https://github.com/andev0x/fnixos  
-**Issues**: https://github.com/andev0x/fnixos/issues
-
+- [NixOS](https://nixos.org/) - The Linux distribution
+- [Hyprland](https://hyprland.org/) - The window manager
+- [Nord Theme](https://www.nordtheme.com/) - The color scheme
+- [Stylix](https://github.com/danth/stylix) - The theming system

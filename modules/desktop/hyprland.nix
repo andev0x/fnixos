@@ -1,125 +1,51 @@
 { pkgs, ... }: {
-  # Hyprland window manager - Wayland compositor optimized for ARM64
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
+  # Hyprland window manager - pure Wayland setup
+  programs.hyprland.enable = true;
 
-  # SDDM display manager with Wayland
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
-    settings = {
-      General = {
-        InputMethod = "";
-      };
-    };
-  };
+  # Minimal display manager (SDDM Wayland)
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
 
-  # Optimized font configuration
+  # Font configuration - minimal setup
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
-    noto-fonts
-    noto-fonts-cjk-sans
     noto-fonts-emoji
-    liberation_ttf
   ];
 
-  fonts.fontconfig = {
-    enable = true;
-    defaultFonts = {
-      monospace = [ "JetBrainsMono Nerd Font" ];
-      sansSerif = [ "Noto Sans" ];
-      emoji = [ "Noto Color Emoji" ];
-    };
-    # Font rendering optimization
-    subpixel.rgba = "rgb";
-    hinting = {
-      enable = true;
-      style = "slight";
-    };
-    antialias = true;
+  fonts.fontconfig.defaultFonts = {
+    monospace = [ "JetBrainsMono Nerd Font" ];
+    sansSerif = [ "JetBrainsMono Nerd Font" ];
+    emoji = [ "Noto Color Emoji" ];
   };
 
-  # Wayland essentials - optimized package selection
+  # Essential Wayland packages - minimal set
   environment.systemPackages = with pkgs; [
     # Core Wayland
-    hyprland
-    waybar
-    swww
-    grim
-    slurp
-    wl-clipboard
-    swappy
-    dunst
-    rofi-wayland
+    hyprland        # Window manager
+    waybar          # Status bar
+    swww            # Wallpaper daemon
+    grim            # Screenshot tool
+    slurp           # Region selector
+    wl-clipboard    # Clipboard utilities
 
     # Authentication
     kdePackages.polkit-kde-agent-1
 
-    # Utilities
-    wofi
-    wlogout
-    pavucontrol
-    brightnessctl
-    
-    # Graphics acceleration for ARM64
+    # Essential utilities
+    wofi            # Application launcher
+    wlogout         # Logout menu
     mesa
     mesa.drivers
     vulkan-tools
     glxinfo
-<<<<<<< HEAD
-    
-    # Cursor theme
-    bibata-cursors  # Fallback cursor theme
-=======
-    wayland-utils
-    
-    # Cursor theme
-    banana-cursor
->>>>>>> main
   ];
 
-  # Security
+  # Security policy kit
   security.polkit.enable = true;
 
-  # XDG Desktop Portal for Wayland
+  # Desktop portals for Wayland apps
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
-    extraPortals = [ 
-      pkgs.xdg-desktop-portal-wlr
-      pkgs.xdg-desktop-portal-gtk
-    ];
-    config = {
-      common = {
-        default = [ "wlr" "gtk" ];
-      };
-      hyprland = {
-        default = [ "wlr" "gtk" ];
-      };
-    };
-  };
-
-  # OpenGL/Vulkan support for ARM64
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = false; # Disable for ARM64
-  };
-
-  # Environment variables for Wayland/Hyprland
-  environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-    WLR_NO_HARDWARE_CURSORS = "1"; # Fix for VMware
-    WLR_RENDERER_ALLOW_SOFTWARE = "1";
-    XDG_SESSION_TYPE = "wayland";
-    XDG_CURRENT_DESKTOP = "Hyprland";
-    QT_QPA_PLATFORM = "wayland";
-    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-    GDK_BACKEND = "wayland";
-    CLUTTER_BACKEND = "wayland";
-    SDL_VIDEODRIVER = "wayland";
-    XCURSOR_THEME = "Banana";
-    XCURSOR_SIZE = "24";
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 }
