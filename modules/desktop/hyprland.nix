@@ -28,6 +28,21 @@
     slurp           # Region selector
     wl-clipboard    # Clipboard utilities
 
+    # Cursor theme
+    (pkgs.stdenv.mkDerivation {
+      name = "banana-cursor";
+      src = pkgs.fetchFromGitHub {
+        owner = "ful1e5";
+        repo = "banana-cursor";
+        rev = "v2.0.0";
+        sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+      };
+      installPhase = ''
+        mkdir -p $out/share/icons
+        cp -r themes/* $out/share/icons/
+      '';
+    })
+
     # Authentication
     kdePackages.polkit-kde-agent-1
 
