@@ -37,7 +37,6 @@
 
   # Audio with PipeWire (optimized for low latency)
   security.rtkit.enable = true;
-  services.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -93,7 +92,7 @@
   services.avahi.enable = false;
   services.udisks2.enable = false;
   services.blueman.enable = false;
-  
+
   # Optimize for ARM64 performance
   powerManagement = {
     enable = true;
