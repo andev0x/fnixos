@@ -55,7 +55,7 @@ print_status 0 "Found flake.nix"
 # Validate configuration
 echo ""
 print_info "Validating configuration..."
-if bash validate.sh >/dev/null 2>&1; then
+if bash home/scripts/validate.sh >/dev/null 2>&1; then
     print_status 0 "Configuration validation passed"
 else
     print_warning "Configuration validation had issues. Check the output above."

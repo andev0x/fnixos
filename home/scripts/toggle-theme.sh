@@ -12,10 +12,12 @@ if [ "$current_hash" = "$dark_hash" ]; then
   # Switch to light
   cp "$WAYBAR_DIR/style-light.css" "$WAYBAR_DIR/style.css"
   cp "$WOFI_DIR/style-light.css" "$WOFI_DIR/style.css"
+  notify-send "Theme Changed" "Switched to Light theme" -t 2000
 else
   # Switch to dark
   cp "$WAYBAR_DIR/style-dark.css" "$WAYBAR_DIR/style.css"
   cp "$WOFI_DIR/style-dark.css" "$WOFI_DIR/style.css"
+  notify-send "Theme Changed" "Switched to Dark theme" -t 2000
 fi
 
 # Reload waybar styles
